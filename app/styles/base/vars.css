@@ -36,7 +36,7 @@
 
 /* 고정 속성 */
 :root {
-  --size-content-width: 1280px;
+  --size-content-width: 1080px;
   --color-bg-header: var(--color-dark);
   --color-text-header: var(--color-text-white);
   --color-text-header-dimmed: var(--color-text-white-dimmed);

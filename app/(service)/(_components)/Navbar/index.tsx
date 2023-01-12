@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import classNames from 'classnames/bind'
-import styles from './style/Navbar.module.css'
+import styles from './Navbar.module.css'
 const cx = classNames.bind(styles)
 
 export default function Navbar() {

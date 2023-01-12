@@ -4,7 +4,7 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -16,8 +16,9 @@
     "incremental": true,
     "paths": {
       "@root/*": ["./*"],
-      "@components/*": ["./src/app/(service)/(_components)/*"],
-      "@shared/*": ["./shared/*"]
+      "@components/*": ["./app/(service)/(_components)/*"],
+      "@shared/*": ["./shared/*"],
+      "@app/*": ["./app/*"]
     },
     "plugins": [
       {
