@@ -1,10 +1,6 @@
 import Link from 'next/link'
 
-import { calcFeedPageSize } from '@app/shared/notion'
-
-export default async function Pagination({ pageSize }) {
-  const maxPageSize = await calcFeedPageSize(pageSize)
-
+export default async function Pagination({ maxPageSize }) {
   return (
     <div>
       {Array(maxPageSize)

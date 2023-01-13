@@ -1,4 +1,4 @@
-import { notion } from '@shared/notion'
+import { notion } from './index'
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any): Promise<PageObjectResponse[]> {

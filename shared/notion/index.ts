@@ -2,8 +2,9 @@ import { Client, LogLevel } from '@notionhq/client'
 
 export const notion = new Client({
   auth: process.env.NOTION_TOKEN,
-  logLevel: LogLevel.DEBUG,
+  //logLevel: LogLevel.DEBUG,
 })
 
-export * from './queryDatabase'
-export * from './retrievePage'
+export * from './queries'
+export * from './utils'
+export * from './types'
