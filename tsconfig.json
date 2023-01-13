@@ -17,9 +17,7 @@
     "paths": {
       "@root/*": ["./*"],
       "@components/*": ["./client/components/*"],
-      "@shared/*": ["./shared/*"],
-      "@app/*": ["./app/*"],
-      "@styles/*": ["./app/styles/*"]
+      "@shared/*": ["./shared/*"]
     },
     "plugins": [
       {

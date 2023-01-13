@@ -13,8 +13,6 @@ interface Props {
 
 export default function PageCard({ page }: Props) {
   const title = getTitlePlaintext(page)
-  const slug = title.replaceAll(' ', '-').toLowerCase()
-  console.log(slug)
 
   return (
     <div className={cx('root')}>

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export default async function Pagination({ maxPageSize }) {
+export default function Pagination({ maxPageSize }) {
   return (
     <div>
       {Array(maxPageSize)

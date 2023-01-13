@@ -1,4 +1,6 @@
+import Layout from '@components/Layout'
 import PageCard from '@components/PageCard'
+import Pagination from '@components/Pagination'
 
 import { queryDatabase, calcFeedPageSize } from '@shared/notion'
 
@@ -8,13 +10,16 @@ const cx = classNames.bind(styles)
 
 const PAGE_SIZE = 10
 
-export default function FeedPage({ pages }) {
+export default function FeedPage({ pages, maxPage }) {
   return (
-    <div className={cx('root')}>
-      {pages.map(page => (
-        <PageCard key={page.id} page={page} />
-      ))}
-    </div>
+    <Layout>
+      <div className={cx('root')}>
+        {pages.map(page => (
+          <PageCard key={page.id} page={page} />
+        ))}
+        <Pagination maxPageSize={maxPage} />
+      </div>
+    </Layout>
   )
 }
 
@@ -37,10 +42,12 @@ export async function getStaticPaths() {
 
 export const getStaticProps = async ({ params: { page } }) => {
   const pages = await queryDatabase(PAGE_SIZE, parseInt(page), undefined)
+  const maxPage = await calcFeedPageSize(PAGE_SIZE)
 
   return {
     props: {
       pages,
+      maxPage,
     },
   }
 }
