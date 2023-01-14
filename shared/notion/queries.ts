@@ -28,6 +28,7 @@ export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any
 export async function calcFeedPageSize(PAGE_SIZE: number): Promise<number> {
   /** pretty slow, but there are no way of fetching database size */
   /** used on static site generation */
+  const database_id = process.env.NOTION_DATABASE_ID
   let cnt = 0
   let has_more = true
   let reqs = 0
@@ -35,7 +36,7 @@ export async function calcFeedPageSize(PAGE_SIZE: number): Promise<number> {
 
   while (has_more) {
     const res = await notion.databases.query({
-      database_id: process.env.NOTION_DATABASE_ID,
+      database_id,
       start_cursor: cursor,
     })
     cnt += res.results.length
