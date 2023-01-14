@@ -1,4 +1,4 @@
-import './styles/globals.css'
+import './styles/global.css'
 import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-        <title>your-title</title>
+        <title>jaepang-blog</title>
       </Head>
       <Component {...pageProps} />
     </>

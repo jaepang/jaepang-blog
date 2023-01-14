@@ -27,6 +27,7 @@ export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any
 
 export async function calcFeedPageSize(PAGE_SIZE: number): Promise<number> {
   /** pretty slow, but there are no way of fetching database size */
+  /** used on static site generation */
   let cnt = 0
   let has_more = true
   let reqs = 0
