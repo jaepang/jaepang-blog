@@ -3,7 +3,7 @@ import { calcFeedPageSize, queryDatabase } from '@shared/notion'
 const PAGE_SIZE = 10
 
 export async function getStaticPaths() {
-  const maxPage = await calcFeedPageSize(PAGE_SIZE)
+  const maxPage = await calcFeedPageSize(PAGE_SIZE, undefined)
 
   const paths = Array(maxPage)
     .fill(0)
@@ -21,7 +21,7 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params: { page } }) {
   const pages = await queryDatabase(PAGE_SIZE, parseInt(page), undefined)
-  const maxPage = await calcFeedPageSize(PAGE_SIZE)
+  const maxPage = await calcFeedPageSize(PAGE_SIZE, undefined)
 
   return {
     props: {

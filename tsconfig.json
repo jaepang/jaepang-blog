@@ -16,7 +16,7 @@
     "incremental": true,
     "paths": {
       "@root/*": ["./*"],
-      "@components/*": ["./client/components/*"],
+      "@components/*": ["./components/*"],
       "@shared/*": ["./shared/*"]
     },
     "plugins": [
