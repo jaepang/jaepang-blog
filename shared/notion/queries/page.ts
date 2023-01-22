@@ -1,5 +1,9 @@
 import { notion } from '@shared/notion'
-import { PageObjectResponse, GetPageResponse } from '@notionhq/client/build/src/api-endpoints'
+import {
+  PageObjectResponse,
+  GetPageResponse,
+  ListBlockChildrenResponse,
+} from '@notionhq/client/build/src/api-endpoints'
 
 export async function queryPageIds(filter: any): Promise<string[]> {
   const database_id = process.env.NOTION_DATABASE_ID
@@ -30,4 +34,12 @@ export async function retrerivePage(pageId: string): Promise<GetPageResponse> {
   })
 
   return page
+}
+
+export async function queryBlocks(pageId: string): Promise<ListBlockChildrenResponse> {
+  const blocks = await notion.blocks.children.list({
+    block_id: pageId,
+  })
+
+  return blocks
 }

@@ -16,7 +16,9 @@ export default function PageCard({ page }: Props) {
 
   return (
     <div className={cx('root')}>
-      <div className={cx('title')}>{title}</div>
+      <Link href={`/article/${page.id}`}>
+        <div className={cx('title')}>{title}</div>
+      </Link>
     </div>
   )
 }

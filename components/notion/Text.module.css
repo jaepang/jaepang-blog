@@ -1,0 +1,23 @@
+.text {
+  &.bold {
+    font-weight: bold;
+  }
+  &.italic {
+    font-style: italic;
+  }
+  &.underline {
+    text-decoration: underline;
+  }
+  &.strikethrough {
+    text-decoration: line-through;
+  }
+  &.code {
+    font-family: monospace;
+  }
+  &.link {
+    color: var(--link-color);
+  }
+  &.link:hover {
+    text-decoration: underline;
+  }
+}
