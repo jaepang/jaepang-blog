@@ -26,5 +26,6 @@ export async function getStaticProps({ params: { pageId } }) {
       title,
       blocks,
     },
+    revalidate: 10,
   }
 }

@@ -28,6 +28,6 @@ export async function getStaticProps({ params: { page } }) {
       pages,
       maxPage,
     },
-    revalidate: 60,
+    revalidate: 10,
   }
 }
