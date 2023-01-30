@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Text from './Text'
+import Text from '@components/notion/Text'
 import List from './List'
 
 import { useState } from 'react'
@@ -13,6 +13,7 @@ export default function Block(block: BlockObjectResponse) {
   const [imgClicked, setImgClicked] = useState(false)
   const { type, id } = block
   const value = block[type]
+  console.log(type)
 
   function handleImgClick() {
     setImgClicked(!imgClicked)
@@ -43,6 +44,7 @@ export default function Block(block: BlockObjectResponse) {
         </label>
       )
     case 'toggle':
+      console.log(value)
       return (
         <details>
           <summary>{value?.rich_text && <Text text={value.rich_text} />}</summary>

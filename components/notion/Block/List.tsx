@@ -1,4 +1,4 @@
-import Block from './Block'
+import Block from '.'
 
 export default function List({ block }) {
   const { type } = block
