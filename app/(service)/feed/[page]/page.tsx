@@ -9,6 +9,7 @@ import styles from './FeedPageComponent.module.css'
 const cx = classNames.bind(styles)
 */
 
+export const revalidate = 60
 export async function generateStaticParams() {
   const maxPage = await calcFeedPageSize(10, undefined)
 

@@ -14,6 +14,7 @@ import styles from './ArticlePageComponent.module.css'
 const cx = classNames.bind(styles)
 */
 
+export const revalidate = 60
 export async function generateStaticParams() {
   const pageIds = await queryPageIds(undefined)
   return pageIds.map(pageId => ({ pageId: pageId }))
