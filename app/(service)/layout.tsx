@@ -1,5 +1,5 @@
-import Row from './shared/Row'
-import Navbar from './shared/Navbar'
+import Row from '@components/layout/Row'
+import Navbar from '@components/layout/Navbar'
 
 export default function Layout({ children }) {
   return (
