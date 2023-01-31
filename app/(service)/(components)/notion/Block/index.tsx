@@ -10,14 +10,16 @@ import styles from './Block.module.css'
 const cx = classNames.bind(styles)
 
 export default function Block(block: BlockObjectResponse) {
-  const [imgClicked, setImgClicked] = useState(false)
+  // const [imgClicked, setImgClicked] = useState(false)
   const { type, id } = block
   const value = block[type]
   console.log(type)
 
+  /*
   function handleImgClick() {
     setImgClicked(!imgClicked)
   }
+  */
 
   switch (type) {
     case 'paragraph':
@@ -56,7 +58,7 @@ export default function Block(block: BlockObjectResponse) {
       const caption = value?.caption ? value.caption[0]?.plain_text : ''
 
       return (
-        <figure onClick={handleImgClick}>
+        <figure>
           <div className={cx('image-wrapper')}>
             <Image src={src} alt={caption} />
           </div>

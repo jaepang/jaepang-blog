@@ -16,7 +16,7 @@
     "incremental": true,
     "paths": {
       "@root/*": ["./*"],
-      "@components/*": ["./components/*"],
+      "@components/*": ["./app/(service)/(components)/*"],
       "@shared/*": ["./shared/*"]
     },
     "plugins": [
