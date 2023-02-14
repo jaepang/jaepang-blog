@@ -1,0 +1,29 @@
+.root {
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.7em;
+
+  .title {
+    font-size: 2.8em;
+    font-weight: 700;
+    line-height: 1;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .tags {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+
+    .tag {
+      color: var(--color-text-default);
+      padding: 7px 10px;
+      border-radius: 15px;
+    }
+  }
+}

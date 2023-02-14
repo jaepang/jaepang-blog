@@ -18,8 +18,9 @@ export default function Code({ language, children }) {
   SyntaxHighlighter.registerLanguage('python', python)
   SyntaxHighlighter.registerLanguage('css', css)
 
+  // fontSize: set padding size
   return (
-    <SyntaxHighlighter style={style} language={language} customStyle={{ borderRadius: '12px' }}>
+    <SyntaxHighlighter style={style} language={language} customStyle={{ fontSize: '1.5em', borderRadius: '12px' }}>
       {children}
     </SyntaxHighlighter>
   )

@@ -1,4 +1,5 @@
 import Block from '@components/notion/Block'
+import Header from '@components/article/Header'
 
 import { getTitlePlaintext, queryBlocks, queryPageIds, retrerivePage } from '@shared/notion'
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
@@ -20,7 +21,7 @@ export default async function ArticlePage({ params }: { params: { pageId: string
 
   return (
     <div>
-      <h1>{title}</h1>
+      <Header page={page as PageObjectResponse} />
       {blocks.results.map(block => Block(block as BlockObjectResponse))}
     </div>
   )

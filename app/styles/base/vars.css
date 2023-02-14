@@ -11,7 +11,10 @@
   --color-light-gray: #f8f8f8;
   --color-red: #fc4f4f;
   --color-yellow: #ffce00;
-  --color-blue: #277bc0;
+  --color-blue-light: rgb(211, 229, 239);
+  --color-blue-dark: rgb(40, 69, 108);
+  --color-orange-light: rgb(250, 222, 201);
+  --color-orange-dark: rgb(133, 76, 29);
 
   --color-text-black: rgb(55, 53, 47);
   --color-text-black-dimmed: rgba(55, 53, 47, 0.4);
@@ -25,12 +28,15 @@
   --color-bg-dimmed: var(--color-light-dimmed);
   --color-text-default: var(--color-text-black);
   --color-text-dimmed: var(--color-text-black-dimmed);
+  --color-blue: var(--color-blue-light);
+  --color-orange: var(--color-orange-light);
 
   .theme-dark {
     --color-bg-primary: var(--color-dark);
     --color-bg-secondary: var(--color-dark-dimmed);
     --color-text-default: var(--color-text-white);
     --color-text-dimmed: var(--color-text-white-dimmed);
+    --color-orange: var(--color-orange-dark);
   }
 }
 
