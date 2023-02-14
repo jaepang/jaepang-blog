@@ -2,6 +2,7 @@
 .full-screen {
   width: 100%;
   margin-bottom: 80px;
+  position: relative;
 }
 
 .normal {
@@ -9,6 +10,7 @@
   padding: 0 16px;
   margin: 0 auto;
   margin-bottom: 80px;
+  position: relative;
 }
 
 .no_margin {

@@ -1,11 +1,11 @@
-import Row from '@components/layout/Row'
+import Row, { ROW_TYPE } from '@components/layout/Row'
 import Navbar from '@components/layout/Navbar'
 
 export default function Layout({ children }) {
   return (
     <>
       <Navbar />
-      <Row>{children}</Row>
+      <Row type={ROW_TYPE.FULL_SCREEN}>{children}</Row>
     </>
   )
 }

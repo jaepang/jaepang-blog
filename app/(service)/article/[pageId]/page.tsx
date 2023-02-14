@@ -1,18 +1,11 @@
 import Block from '@components/notion/Block'
 
 import { getTitlePlaintext, queryBlocks, queryPageIds, retrerivePage } from '@shared/notion'
+import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
-import {
-  BlockObjectResponse,
-  ListBlockChildrenResponse,
-  PageObjectResponse,
-} from '@notionhq/client/build/src/api-endpoints'
-
-/*
 import classNames from 'classnames/bind'
-import styles from './ArticlePageComponent.module.css'
+import styles from './ArticlePage.module.css'
 const cx = classNames.bind(styles)
-*/
 
 export const revalidate = 60
 export async function generateStaticParams() {

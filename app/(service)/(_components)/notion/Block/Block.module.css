@@ -1,0 +1,12 @@
+.root {
+  max-width: var(--size-content-width);
+  padding: 0 16px;
+  margin: 0 auto;
+  margin-bottom: 1em;
+
+  &.heading_1,
+  &.heading_2,
+  &.heading_3 {
+    margin-bottom: 2em;
+  }
+}

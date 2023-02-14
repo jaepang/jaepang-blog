@@ -1,0 +1,31 @@
+.root {
+  width: 100%;
+  height: auto;
+  cursor: zoom-in;
+
+  .figure {
+    width: 100%;
+    margin: 0;
+    border: 1px solid red;
+
+    .image {
+      width: 100%;
+      height: auto;
+      transition: all 0.3s;
+    }
+  }
+
+  &.zoom {
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-bg-dimmed);
+    backdrop-filter: blur(10px);
+    z-index: 11;
+    cursor: zoom-out;
+  }
+}
