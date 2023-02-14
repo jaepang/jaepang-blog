@@ -13,8 +13,8 @@
   --color-yellow: #ffce00;
   --color-blue: #277bc0;
 
-  --color-text-black: rgba(0, 0, 0, 1);
-  --color-text-black-dimmed: rgba(0, 0, 0, 0.4);
+  --color-text-black: rgb(55, 53, 47);
+  --color-text-black-dimmed: rgba(55, 53, 47, 0.4);
   --color-text-white: rgba(255, 255, 255, 1);
   --color-text-white-dimmed: rgba(255, 255, 255, 0.4);
 }
@@ -36,7 +36,8 @@
 
 /* 고정 속성 */
 :root {
-  --size-content-width: 1080px;
+  --size-content-width: 880px;
+  --border-radius: 12px;
   --color-bg-header: var(--color-dark);
   --color-text-header: var(--color-text-white);
   --color-text-header-dimmed: var(--color-text-white-dimmed);

@@ -12,12 +12,22 @@
     text-decoration: line-through;
   }
   &.code {
-    font-family: monospace;
+    padding: 5px;
+    font-size: 0.75em;
+    background-color: rgba(135, 131, 120, 0.15);
+    color: #eb5757;
+    border-radius: 3px;
+    font-family: 'SFMono-Regular', Menlo, Consolas, 'PT Mono', 'Liberation Mono', Courier, monospace;
   }
   &.link {
-    color: var(--link-color);
-  }
-  &.link:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 0.05em solid;
+    border-color: var(--color-text-dimmed);
+    opacity: 0.7;
+
+    &:hover {
+      opacity: 1;
+      border-color: var(--color-text-default);
+    }
   }
 }

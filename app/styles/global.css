@@ -26,6 +26,10 @@ a {
   color: inherit;
 }
 
+a:hover {
+  text-decoration: none;
+}
+
 #__next {
   height: 100%;
 }

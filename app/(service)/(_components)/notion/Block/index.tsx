@@ -1,11 +1,13 @@
 import Image from '@components/notion/Image'
 import Text from '@components/notion/Text'
+import Code from '@components/notion/Code'
 import List from './List'
 
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 import classNames from 'classnames/bind'
 import styles from './Block.module.css'
+import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c'
 const cx = classNames.bind(styles)
 
 export default function Block(block: BlockObjectResponse) {
@@ -65,9 +67,12 @@ export default function Block(block: BlockObjectResponse) {
       content = <blockquote>{value?.rich_text && <Text text={value.rich_text} />}</blockquote>
       break
     case 'code':
+      const language = value.language?.toLowerCase() || 'text'
+      const code = value?.rich_text?.map(({ text }) => text.content).join('') || ''
+
       content = (
         <pre>
-          <code>{value?.rich_text && <Text text={value.rich_text} />}</code>
+          <Code language={language}>{code}</Code>
         </pre>
       )
       break
