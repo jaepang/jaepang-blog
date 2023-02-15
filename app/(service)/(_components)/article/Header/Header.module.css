@@ -1,17 +1,22 @@
 .root {
-  width: 100%;
-  max-width: 880px;
+  max-width: var(--size-content-width);
   margin: 0 auto;
+  padding: 0 16px;
+  padding-top: 1.5em;
   display: flex;
   flex-direction: column;
   row-gap: 0.7em;
 
   .title {
-    font-size: 2.8em;
+    font-size: 2.5em;
     font-weight: 700;
     line-height: 1;
     margin: 0;
-    margin-bottom: 0.5rem;
+  }
+
+  .created-at {
+    font-size: 1em;
+    color: var(--color-text-dimmed);
   }
 
   .tags {
@@ -22,8 +27,9 @@
 
     .tag {
       color: var(--color-text-default);
-      padding: 7px 10px;
-      border-radius: 15px;
+      padding: 0 8px;
+      border-radius: 10px;
+      font-size: 0.9em;
     }
   }
 }

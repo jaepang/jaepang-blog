@@ -12,12 +12,13 @@
     text-decoration: line-through;
   }
   &.code {
-    padding: 5px;
-    font-size: 0.75em;
+    padding: 4px 5px;
+    font-size: 0.9em;
     background-color: rgba(135, 131, 120, 0.15);
     color: #eb5757;
-    border-radius: 3px;
+    border-radius: 4px;
     font-family: 'SFMono-Regular', Menlo, Consolas, 'PT Mono', 'Liberation Mono', Courier, monospace;
+    white-space: nowrap;
   }
   &.link {
     text-decoration: none;

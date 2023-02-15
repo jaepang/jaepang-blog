@@ -2,7 +2,6 @@
 
 html {
   height: 100%;
-  font-size: 10px;
   line-height: 10px;
   -webkit-font-smoothing: antialiased;
 }
@@ -112,7 +111,15 @@ a {
 }
 
 textarea,
-input:matches([type='email'], [type='number'], [type='password'], [type='search'], [type='tel'], [type='text'], [type='url']) {
+input:matches(
+    [type='email'],
+    [type='number'],
+    [type='password'],
+    [type='search'],
+    [type='tel'],
+    [type='text'],
+    [type='url']
+  ) {
   appearance: none;
   -webkit-appearance: none;
 }
