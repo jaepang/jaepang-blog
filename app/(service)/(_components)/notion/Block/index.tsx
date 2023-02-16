@@ -3,30 +3,80 @@ import Text from '@components/notion/Text'
 import Code from '@components/notion/Code'
 import List from './List'
 
+import { queryChildrenBlocks } from '@root/shared/notion'
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 import classNames from 'classnames/bind'
 import styles from './Block.module.css'
-import language from 'react-syntax-highlighter/dist/esm/languages/hljs/1c'
 const cx = classNames.bind(styles)
 
-export default function Block(block: BlockObjectResponse) {
+export default async function Block({ block }: { block: BlockObjectResponse }) {
   const { type, id } = block
   const value = block[type]
+  const children = await queryChildrenBlocks(id)
   let content: JSX.Element
+  const text = value?.rich_text && <Text text={value.rich_text} />
 
   switch (type) {
     case 'paragraph':
-      content = <p>{value?.rich_text && <Text text={value.rich_text} />}</p>
+      content = <p>{text}</p>
       break
     case 'heading_1':
-      content = <h1>{value?.rich_text && <Text text={value.rich_text} />}</h1>
+      content = (
+        <>
+          {value?.is_toggleable ? (
+            <details>
+              <summary>
+                <span className={cx('summary-heading')}>{text}</span>
+              </summary>
+              {children?.results.map(block => (
+                /* @ts-expect-error Server Component */
+                <Block key={block.id} block={block as BlockObjectResponse} />
+              ))}
+            </details>
+          ) : (
+            <h1>{text}</h1>
+          )}
+        </>
+      )
       break
     case 'heading_2':
-      content = <h2>{value?.rich_text && <Text text={value.rich_text} />}</h2>
+      content = (
+        <>
+          {value?.is_toggleable ? (
+            <details>
+              <summary>
+                <span className={cx('summary-heading')}>{text}</span>
+              </summary>
+              {children?.results.map(block => (
+                /* @ts-expect-error Server Component */
+                <Block key={block.id} block={block as BlockObjectResponse} />
+              ))}
+            </details>
+          ) : (
+            <h2>{text}</h2>
+          )}
+        </>
+      )
       break
     case 'heading_3':
-      content = <h3>{value?.rich_text && <Text text={value.rich_text} />}</h3>
+      content = (
+        <>
+          {value?.is_toggleable ? (
+            <details>
+              <summary>
+                <span className={cx('summary-heading')}>{text}</span>
+              </summary>
+              {children?.results.map(block => (
+                /* @ts-expect-error Server Component */
+                <Block key={block.id} block={block as BlockObjectResponse} />
+              ))}
+            </details>
+          ) : (
+            <h3>{text}</h3>
+          )}
+        </>
+      )
       break
     case 'bulleted_list_item':
     case 'numbered_list_item':
@@ -50,7 +100,10 @@ export default function Block(block: BlockObjectResponse) {
       content = (
         <details>
           <summary>{value?.rich_text && <Text text={value.rich_text} />}</summary>
-          {value.children?.map(child => Block(child))}
+          {children?.results.map(block => (
+            /* @ts-expect-error Server Component */
+            <Block key={block.id} block={block as BlockObjectResponse} />
+          ))}
         </details>
       )
       break

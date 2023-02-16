@@ -36,9 +36,9 @@ export async function retrerivePage(pageId: string): Promise<GetPageResponse> {
   return page
 }
 
-export async function queryBlocks(pageId: string): Promise<ListBlockChildrenResponse> {
+export async function queryChildrenBlocks(parentId: string): Promise<ListBlockChildrenResponse> {
   const blocks = await notion.blocks.children.list({
-    block_id: pageId,
+    block_id: parentId,
   })
 
   return blocks

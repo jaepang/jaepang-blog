@@ -7,7 +7,9 @@ export default function List({ block }) {
   if (!value) return null
 
   const isNumberedList = type === 'numbered_list_item'
-  const children = value.children.map(child => Block(child))
+
+  /* @ts-expect-error Server Component */
+  const children = value.children.map(block => <Block key={block.id} block={block} />)
 
   return isNumberedList ? <ol>{children}</ol> : <ul>{children}</ul>
 }

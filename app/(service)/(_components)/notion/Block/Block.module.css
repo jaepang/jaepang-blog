@@ -6,13 +6,40 @@
 
   &.heading_1 {
     margin-top: 2.5em;
+
+    summary {
+      cursor: pointer;
+
+      .summary-heading {
+        font-size: 2em;
+        font-weight: bold;
+      }
+    }
   }
 
   &.heading_2 {
     margin-top: 2em;
+
+    summary {
+      cursor: pointer;
+
+      .summary-heading {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+    }
   }
 
   &.heading_3 {
     margin-top: 1em;
+
+    summary {
+      cursor: pointer;
+
+      .summary-heading {
+        font-size: 1.3em;
+        font-weight: bold;
+      }
+    }
   }
 }

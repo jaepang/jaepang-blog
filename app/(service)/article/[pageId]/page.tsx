@@ -1,7 +1,7 @@
 import Block from '@components/notion/Block'
 import Header from '@components/article/Header'
 
-import { getTitlePlaintext, queryBlocks, queryPageIds, retrerivePage } from '@shared/notion'
+import { queryChildrenBlocks, queryPageIds, retrerivePage } from '@shared/notion'
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 import classNames from 'classnames/bind'
@@ -16,13 +16,15 @@ export async function generateStaticParams() {
 
 export default async function ArticlePage({ params }: { params: { pageId: string } }) {
   const page = await retrerivePage(params.pageId)
-  const title = getTitlePlaintext(page as PageObjectResponse)
-  const blocks = await queryBlocks(params.pageId)
+  const blocks = await queryChildrenBlocks(params.pageId)
 
   return (
     <div>
       <Header page={page as PageObjectResponse} />
-      {blocks.results.map(block => Block(block as BlockObjectResponse))}
+      {blocks.results.map(block => (
+        /* @ts-expect-error Server Component */
+        <Block key={block.id} block={block as BlockObjectResponse} />
+      ))}
     </div>
   )
 }
