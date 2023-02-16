@@ -13,7 +13,7 @@ const cx = classNames.bind(styles)
 export default async function Block({ block }: { block: BlockObjectResponse }) {
   const { type, id } = block
   const value = block[type]
-  const children = await queryChildrenBlocks(id)
+  const children = (value.has_children || value.is_toggleable) && (await queryChildrenBlocks(id))
   let content: JSX.Element
   const text = value?.rich_text && <Text text={value.rich_text} />
 
