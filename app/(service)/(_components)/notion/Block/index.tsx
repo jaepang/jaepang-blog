@@ -130,7 +130,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
       )
       break
     default:
-      console.log('Unknown block type:', type)
+      // console.log('Unknown block type:', type)
       content = null
   }
 

@@ -10,7 +10,6 @@ export default function CreatedAt({ createdTime }) {
   const [language, setLanguage] = useState('ko-kr')
 
   useEffect(() => {
-    console.log(navigator)
     navigator && setLanguage(navigator.language ?? 'ko-kr')
   }, [])
 
