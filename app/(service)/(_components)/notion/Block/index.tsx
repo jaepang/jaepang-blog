@@ -13,7 +13,8 @@ const cx = classNames.bind(styles)
 export default async function Block({ block }: { block: BlockObjectResponse }) {
   const { type, id } = block
   const value = block[type]
-  const children = (value.has_children || value.is_toggleable) && (await queryChildrenBlocks(id))
+  const hasChildren = value?.has_children || value?.is_toggleable || type === 'toggle'
+  const children = hasChildren && (await queryChildrenBlocks(id))
   let content: JSX.Element
   const text = value?.rich_text && <Text text={value.rich_text} />
 
@@ -21,6 +22,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
     case 'paragraph':
       content = <p>{text}</p>
       break
+
     case 'heading_1':
       content = (
         <>
@@ -40,6 +42,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </>
       )
       break
+
     case 'heading_2':
       content = (
         <>
@@ -59,6 +62,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </>
       )
       break
+
     case 'heading_3':
       content = (
         <>
@@ -78,6 +82,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </>
       )
       break
+
     case 'bulleted_list_item':
     case 'numbered_list_item':
       content = (
@@ -87,6 +92,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </li>
       )
       break
+
     case 'to_do':
       content = (
         <label htmlFor={id}>
@@ -95,11 +101,11 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </label>
       )
       break
+
     case 'toggle':
-      // console.log(value)
       content = (
         <details>
-          <summary>{value?.rich_text && <Text text={value.rich_text} />}</summary>
+          <summary>{text}</summary>
           {children?.results.map(block => (
             /* @ts-expect-error Server Component */
             <Block key={block.id} block={block as BlockObjectResponse} />
@@ -107,18 +113,22 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </details>
       )
       break
+
     case 'image':
       const src = value.type === 'external' ? value?.external?.url : value?.file?.url
       const caption = value?.caption ? value.caption[0]?.plain_text : ''
 
       content = <Image id={id} src={src} caption={caption} />
       break
+
     case 'divider':
       content = <hr key={id} />
       break
+
     case 'quote':
       content = <blockquote>{value?.rich_text && <Text text={value.rich_text} />}</blockquote>
       break
+
     case 'code':
       const language = value.language?.toLowerCase() || 'text'
       const code = value?.rich_text?.map(({ text }) => text.content).join('') || ''
@@ -129,10 +139,21 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
         </pre>
       )
       break
+
+    case 'callout':
+      content = (
+        <div className={cx('callout-body')}>
+          {value?.icon?.emoji && <span className={cx('emoji')}>{value.icon.emoji}</span>}
+          {value?.rich_text && <Text text={value.rich_text} />}
+        </div>
+      )
+      break
+
     default:
       // console.log('Unknown block type:', type)
       content = null
   }
 
+  if (!content) return null
   return <div className={cx('root', type)}>{content}</div>
 }
