@@ -1,12 +1,7 @@
 import './styles/global.css'
-
-enum ColorTheme {
-  Light = 'light',
-  Dark = 'dark',
-}
+import ThemeRootProvider from './provider/ThemeProvider'
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const colorTheme: ColorTheme = ColorTheme.Light
   return (
     <html>
       <head>
@@ -15,7 +10,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <title>jaepang-blog</title>
       </head>
-      <body className={`theme-${colorTheme}`}>{children}</body>
+      <body>
+        <ThemeRootProvider>{children}</ThemeRootProvider>
+      </body>
     </html>
   )
 }

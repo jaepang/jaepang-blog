@@ -33,7 +33,7 @@ export default function Text({ text }: TextProps) {
               code,
             })}
             style={{
-              color: color,
+              color: color !== 'default' && `var(--color-text-${color})`,
             }}>
             {link ? <a href={link.url}>{content ?? ''}</a> : content ?? ''}
           </span>

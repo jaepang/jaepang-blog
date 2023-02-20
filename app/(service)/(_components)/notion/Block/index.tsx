@@ -5,6 +5,7 @@ import List from './List'
 
 import { queryChildrenBlocks } from '@root/shared/notion'
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { CSSProperties } from 'react'
 
 import classNames from 'classnames/bind'
 import styles from './Block.module.css'
@@ -141,10 +142,24 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
       break
 
     case 'callout':
+      const { color } = value
+      let style: CSSProperties
+      if (color?.includes('background')) {
+        style = {
+          backgroundColor: `var(--color-bg-${color.slice(0, -11) ?? 'gray'})`,
+        }
+      } else {
+        style = {
+          backgroundColor: 'transparent',
+          border: '1px solid var(--color-light-gray-border)',
+          color: `var(--color-text-${color}) !important`,
+        }
+      }
+
       content = (
-        <div className={cx('callout-body')}>
+        <div className={cx('callout-body')} style={style}>
           {value?.icon?.emoji && <span className={cx('emoji')}>{value.icon.emoji}</span>}
-          {value?.rich_text && <Text text={value.rich_text} />}
+          <div className={cx('text')}>{value?.rich_text && <Text text={value.rich_text} />}</div>
         </div>
       )
       break
