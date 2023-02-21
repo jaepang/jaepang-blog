@@ -27,11 +27,12 @@
   --color-bg-purple-light: #eae4f2;
   --color-bg-purple-dark: #443f57;
   --color-bg-pink-light: #f4dfeb;
-  --colo-bg-pink-dark: #533b4c;
+  --color-bg-pink-dark: #533b4c;
   --color-bg-red-light: #fbe4e4;
   --color-bg-red-dark: #594141;
 
   --color-text-default-light: #37352f;
+  --color-text-default-dimmed: rgba(55, 53, 47, 0.5);
   --color-text-default-dark: #ffffff;
   --color-text-gray-light: #9b9a97;
   --color-text-gray-dark: #979a9b;
@@ -68,7 +69,7 @@
   --color-bg-red: var(--color-bg-red-light);
 
   --color-text-default: var(--color-text-default-light);
-  --color-text-dimmed: var(--color-text-black-dimmed);
+  --color-text-dimmed: var(--color-text-default-dimmed);
   --color-text-gray: var(--color-text-gray-light);
   --color-text-brown: var(--color-text-brown-light);
   --color-text-orange: var(--color-text-orange-light);

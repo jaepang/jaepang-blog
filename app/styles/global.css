@@ -43,6 +43,14 @@ a:hover {
   text-decoration: none;
 }
 
+ul {
+  list-style: disc;
+}
+
+ol {
+  list-style: decimal;
+}
+
 #__next {
   height: 100%;
 }

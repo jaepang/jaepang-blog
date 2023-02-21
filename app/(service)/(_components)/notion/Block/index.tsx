@@ -1,7 +1,9 @@
+import RenderBlocks from './RenderBlocks'
 import Image from '@components/notion/Image'
 import Text from '@components/notion/Text'
 import Code from '@components/notion/Code'
-import List from './List'
+import 'katex/dist/katex.min.css'
+import { BlockMath } from 'react-katex'
 
 import { queryChildrenBlocks } from '@root/shared/notion'
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
@@ -12,10 +14,11 @@ import styles from './Block.module.css'
 const cx = classNames.bind(styles)
 
 export default async function Block({ block }: { block: BlockObjectResponse }) {
-  const { type, id } = block
+  const { type, id, has_children } = block
   const value = block[type]
-  const hasChildren = value?.has_children || value?.is_toggleable || type === 'toggle'
-  const children = hasChildren && (await queryChildrenBlocks(id))
+
+  const children = has_children && (await queryChildrenBlocks(id))
+
   let content: JSX.Element
   const text = value?.rich_text && <Text text={value.rich_text} />
 
@@ -89,17 +92,17 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
       content = (
         <li>
           <Text text={value.rich_text} />
-          {!!value.children && List({ block })}
+          {children?.results && <RenderBlocks blocks={children?.results as BlockObjectResponse[]} />}
         </li>
       )
       break
 
     case 'to_do':
       content = (
-        <label htmlFor={id}>
-          <input type="checkbox" id={id} checked={value.checked} disabled />
+        <>
+          {value.checked ? <div className={cx('checkbox', 'checked')} /> : <div className={cx('checkbox')} />}
           {value?.rich_text && <Text text={value.rich_text} />}
-        </label>
+        </>
       )
       break
 
@@ -130,6 +133,10 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
       content = <blockquote>{value?.rich_text && <Text text={value.rich_text} />}</blockquote>
       break
 
+    case 'equation':
+      content = <BlockMath>{value?.expression}</BlockMath>
+      break
+
     case 'code':
       const language = value.language?.toLowerCase() || 'text'
       const code = value?.rich_text?.map(({ text }) => text.content).join('') || ''
@@ -144,6 +151,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
     case 'callout':
       const { color } = value
       let style: CSSProperties
+
       if (color?.includes('background')) {
         style = {
           backgroundColor: `var(--color-bg-${color.slice(0, -11) ?? 'gray'})`,
@@ -165,7 +173,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
       break
 
     default:
-      // console.log('Unknown block type:', type)
+      console.log('Unknown block type:', type)
       content = null
   }
 

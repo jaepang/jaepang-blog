@@ -1,5 +1,6 @@
 import Block from '@components/notion/Block'
-import Header from '@components/article/Header'
+import RenderBlocks from '@components/notion/Block/RenderBlocks'
+import Header from '../Header'
 
 import { queryChildrenBlocks, queryPageIds, retrerivePage } from '@shared/notion'
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
@@ -16,15 +17,16 @@ export async function generateStaticParams() {
 
 export default async function ArticlePage({ params }: { params: { pageId: string } }) {
   const page = await retrerivePage(params.pageId)
-  const blocks = await queryChildrenBlocks(params.pageId)
+  const blocks = (await queryChildrenBlocks(params.pageId)) as { results: BlockObjectResponse[] }
 
   return (
     <div>
       <Header page={page as PageObjectResponse} />
-      {blocks.results.map(block => (
-        /* @ts-expect-error Server Component */
+      {/*blocks.results.map(block => (
+        /* @ts-expect-error Server Component 
         <Block key={block.id} block={block as BlockObjectResponse} />
-      ))}
+      ))*/}
+      <RenderBlocks blocks={blocks.results} />
     </div>
   )
 }

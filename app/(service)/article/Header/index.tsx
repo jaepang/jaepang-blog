@@ -26,7 +26,7 @@ export default function Header({ page }: { page: PageObjectResponse }) {
               key={tag.id}
               className={cx('tag')}
               style={{
-                backgroundColor: `var(--color-${tag.color})`,
+                backgroundColor: `var(--color-bg-${tag.color})`,
               }}>
               {tag.name}
             </div>
