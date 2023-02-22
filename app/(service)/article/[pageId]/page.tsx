@@ -22,10 +22,6 @@ export default async function ArticlePage({ params }: { params: { pageId: string
   return (
     <div>
       <Header page={page as PageObjectResponse} />
-      {/*blocks.results.map(block => (
-        /* @ts-expect-error Server Component 
-        <Block key={block.id} block={block as BlockObjectResponse} />
-      ))*/}
       <RenderBlocks blocks={blocks.results} />
     </div>
   )
