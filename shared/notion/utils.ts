@@ -7,5 +7,12 @@ export function getPropertyKeyByType(object: Object, type: string) {
 
 export function getTitlePlaintext(page: PageObjectResponse): string {
   const properties = page?.properties
-  return (properties?.[getPropertyKeyByType(properties, 'title')] as Title).title[0].plain_text ?? ''
+  const titles = (properties?.[getPropertyKeyByType(properties, 'title')] as Title).title
+  const title = titles.reduce((acc, curr) => {
+    if (curr.plain_text) {
+      return acc + curr.plain_text
+    }
+    return acc
+  }, '')
+  return title ?? ''
 }
