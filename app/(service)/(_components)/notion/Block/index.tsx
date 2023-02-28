@@ -152,7 +152,7 @@ export default async function Block({ block, classNames }: Props) {
       break
 
     default:
-      console.log('Unknown block type:', type)
+      // console.log('Unknown block type:', type)
       content = null
   }
 
