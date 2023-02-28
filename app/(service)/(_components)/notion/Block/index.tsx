@@ -13,7 +13,12 @@ import classNames from 'classnames/bind'
 import styles from './Block.module.css'
 const cx = classNames.bind(styles)
 
-export default async function Block({ block }: { block: BlockObjectResponse }) {
+interface Props {
+  block: BlockObjectResponse
+  classNames?: string
+}
+
+export default async function Block({ block, classNames }: Props) {
   const { type, id, has_children } = block
   const value = block[type]
 
@@ -37,7 +42,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
               </summary>
               {children?.results.map(block => (
                 /* @ts-expect-error Server Component */
-                <Block key={block.id} block={block as BlockObjectResponse} />
+                <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
               ))}
             </details>
           ) : (
@@ -57,7 +62,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
               </summary>
               {children?.results.map(block => (
                 /* @ts-expect-error Server Component */
-                <Block key={block.id} block={block as BlockObjectResponse} />
+                <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
               ))}
             </details>
           ) : (
@@ -77,7 +82,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
               </summary>
               {children?.results.map(block => (
                 /* @ts-expect-error Server Component */
-                <Block key={block.id} block={block as BlockObjectResponse} />
+                <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
               ))}
             </details>
           ) : (
@@ -112,7 +117,7 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
           <summary>{text}</summary>
           {children?.results.map(block => (
             /* @ts-expect-error Server Component */
-            <Block key={block.id} block={block as BlockObjectResponse} />
+            <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
           ))}
         </details>
       )
@@ -152,5 +157,5 @@ export default async function Block({ block }: { block: BlockObjectResponse }) {
   }
 
   if (!content) return null
-  return <div className={cx('root', type)}>{content}</div>
+  return <div className={cx('root', type, classNames)}>{content}</div>
 }

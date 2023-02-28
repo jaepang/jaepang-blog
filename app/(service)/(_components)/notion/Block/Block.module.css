@@ -108,10 +108,19 @@
     }
   }
 
+  &.code.summary {
+    padding: 0 5px;
+  }
+
   .code-block {
     background-color: #282c34;
     border-radius: var(--border-radius);
     position: relative;
+
+    &.summary {
+      width: calc(100% + 32px);
+      margin-left: -16px;
+    }
 
     .copy-wrapper {
       position: absolute;

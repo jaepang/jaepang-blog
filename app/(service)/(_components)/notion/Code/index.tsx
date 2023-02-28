@@ -58,6 +58,7 @@ export default function Code({ value, children }) {
         showLineNumbers
         style={style}
         lineNumberStyle={lineNumberStyle}
+        useInlineStyles={true}
         language={language}
         customStyle={customStyle}>
         {children}
