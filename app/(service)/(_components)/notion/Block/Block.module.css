@@ -160,6 +160,13 @@
       color: var(--color-text-gray-dark);
     }
   }
+
+  &.table {
+    width: calc(100% - 16px);
+    max-width: 100%;
+    padding-left: 0;
+    overflow: auto;
+  }
 }
 
 .list {

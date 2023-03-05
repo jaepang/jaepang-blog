@@ -1,14 +1,18 @@
 import 'katex/dist/katex.min.css'
 import { InlineMath } from 'react-katex'
 
-import { TextRichTextItemResponse, EquationRichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
+import {
+  RichTextItemResponse,
+  TextRichTextItemResponse,
+  EquationRichTextItemResponse,
+} from '@notionhq/client/build/src/api-endpoints'
 
 import classNames from 'classnames/bind'
 import styles from './Text.module.css'
 const cx = classNames.bind(styles)
 
 interface TextProps {
-  text: (TextRichTextItemResponse | EquationRichTextItemResponse)[]
+  text: RichTextItemResponse[]
 }
 
 export default function Text({ text }: TextProps) {

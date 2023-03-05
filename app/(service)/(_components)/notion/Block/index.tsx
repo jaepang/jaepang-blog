@@ -3,6 +3,7 @@ import Image from '@components/notion/Image'
 import Text from '@components/notion/Text'
 import Code from '@components/notion/Code'
 import Callout from '@components/notion/Callout'
+import Table from '@components/notion/Table'
 import 'katex/dist/katex.min.css'
 import { BlockMath } from 'react-katex'
 
@@ -149,6 +150,10 @@ export default async function Block({ block, classNames }: Props) {
 
     case 'callout':
       content = <Callout value={value}>{text}</Callout>
+      break
+
+    case 'table':
+      content = <Table table={value} childrenBlocks={children.results as BlockObjectResponse[]} />
       break
 
     default:
