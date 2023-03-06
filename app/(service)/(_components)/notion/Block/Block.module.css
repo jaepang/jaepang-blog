@@ -3,6 +3,9 @@
   padding: 0 16px;
   margin: 0 auto;
   margin-bottom: 0.6em;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  word-break: break-word;
 
   &.heading_1 {
     margin-top: 2.5em;
@@ -96,16 +99,12 @@
     }
   }
 
-  &.callout {
-    width: 100%;
-
-    .callout-body {
-      width: 100%;
-      padding: 0.5em 1em;
-      display: flex;
-      column-gap: 0.5em;
-      border-radius: var(--border-radius);
-    }
+  &.callout .callout-body {
+    width: calc(100% - 2em);
+    padding: 0.5em 1em;
+    display: flex;
+    column-gap: 0.5em;
+    border-radius: var(--border-radius);
   }
 
   &.code.summary {
@@ -162,9 +161,11 @@
   }
 
   &.table {
-    width: calc(100% - 16px);
+    width: 100%;
     max-width: 100%;
-    padding-left: 0;
+    margin: 0;
+    margin-bottom: 0.6em;
+    padding: 0;
     overflow: auto;
   }
 }

@@ -1,4 +1,10 @@
 .text {
+  width: 100%;
+
+  span {
+    display: inline-block;
+  }
+
   &.bold {
     font-weight: bold;
   }

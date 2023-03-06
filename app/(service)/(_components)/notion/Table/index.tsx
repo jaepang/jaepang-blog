@@ -21,7 +21,7 @@ interface Props {
 export default function Table({ table, childrenBlocks }: Props) {
   const { has_column_header, has_row_header } = table
   const { width } = useWindowSize()
-  const paddingLeft = width > 700 ? (width - 700) / 2 : 0
+  const paddingLeft = width > 732 ? (width - 700) / 2 : '16px'
   const rows = childrenBlocks as TableRowBlockObjectResponse[]
 
   return (
