@@ -132,7 +132,7 @@ export default async function Block({ block, classNames }: Props) {
       break
 
     case 'divider':
-      content = <hr key={id} />
+      content = <></>
       break
 
     case 'quote':

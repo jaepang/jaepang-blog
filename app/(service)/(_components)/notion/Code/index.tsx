@@ -5,6 +5,7 @@ import style from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark'
 import { BsClipboard, BsClipboardCheck } from 'react-icons/bs'
 
 import { useState } from 'react'
+import { useWindowSize } from '@hooks/useWindowSize'
 
 /** add languages you want to use */
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
@@ -15,11 +16,12 @@ import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
 
 import classNames from 'classnames/bind'
-import styles from '@components/notion/Block/Block.module.css'
+import styles from './Code.module.css'
 const cx = classNames.bind(styles)
 
 export default function Code({ value, children }) {
   const [copied, setCopied] = useState(false)
+  const { width } = useWindowSize()
 
   SyntaxHighlighter.registerLanguage('jsx', jsx)
   SyntaxHighlighter.registerLanguage('tsx', tsx)
@@ -30,11 +32,15 @@ export default function Code({ value, children }) {
 
   function copyToClipboard() {
     if (navigator?.clipboard) {
-      navigator.clipboard.writeText(children)
-      setCopied(true)
-      setTimeout(() => {
-        setCopied(false)
-      }, 1500)
+      try {
+        navigator.clipboard.writeText(children)
+        setCopied(true)
+        setTimeout(() => {
+          setCopied(false)
+        }, 1500)
+      } catch (e) {
+        window.alert('소스코드 복사에 실패했습니다. 다시 시도해주세요.')
+      }
     }
   }
 
@@ -44,18 +50,19 @@ export default function Code({ value, children }) {
     padding: '0.9em 0',
     fontSize: '1.5em', // set padding size; default: 1em
     borderRadius: 'var(--border-radius)',
+    paddingLeft: width <= 732 ? '0.75em' : '0',
   }
   const lineNumberStyle = {
     minWidth: '2.8em',
   }
 
   return (
-    <pre className={cx('code-block')}>
+    <pre className={cx('root')}>
       <div className={cx('copy-wrapper', { 'click-available': !copied, copied: copied })} onClick={copyToClipboard}>
         {copied ? <BsClipboardCheck /> : <BsClipboard />}
       </div>
       <SyntaxHighlighter
-        showLineNumbers
+        showLineNumbers={width > 732}
         style={style}
         lineNumberStyle={lineNumberStyle}
         useInlineStyles={true}

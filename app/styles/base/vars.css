@@ -9,6 +9,8 @@
   --color-gray-dimmed: #cacaca;
   --color-light-gray-border: #ededed;
   --color-light-gray: #f8f8f8;
+  --color-light-border: rgb(233, 233, 231);
+  --color-dark-border: rgba(47, 47, 47);
 
   --color-bg-default-light: #ffffff;
   --color-bg-default-dark: #2f3437;
@@ -30,6 +32,9 @@
   --color-bg-pink-dark: #533b4c;
   --color-bg-red-light: #fbe4e4;
   --color-bg-red-dark: #594141;
+
+  --color-bg-table-header-light: rgb(250, 250, 251);
+  --color-bg-table-header-dark: rgba(255, 255, 255, 0.03);
 
   --color-text-default-light: #37352f;
   --color-text-default-dimmed: rgba(55, 53, 47, 0.5);
@@ -68,6 +73,9 @@
   --color-bg-pink: var(--color-bg-pink-light);
   --color-bg-red: var(--color-bg-red-light);
 
+  --color-bg-table-header: var(--color-bg-table-header-light);
+  --color-border-default: var(--color-light-border);
+
   --color-text-default: var(--color-text-default-light);
   --color-text-dimmed: var(--color-text-default-dimmed);
   --color-text-gray: var(--color-text-gray-light);
@@ -95,6 +103,9 @@
     --color-bg-purple: var(--color-bg-purple-dark);
     --color-bg-pink: var(--color-bg-pink-dark);
     --color-bg-red: var(--color-bg-red-dark);
+
+    --color-bg-table-header: var(--color-bg-table-header-dark);
+    --color-border-default: var(--color-dark-border);
 
     --color-text-default: var(--color-text-white);
     --color-text-dimmed: var(--color-text-white-dimmed);
