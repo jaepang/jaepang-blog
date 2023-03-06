@@ -167,6 +167,8 @@
     margin-bottom: 0.6em;
     padding: 0;
     overflow: auto;
+    /* about 14px */
+    font-size: 0.78em;
   }
 }
 
