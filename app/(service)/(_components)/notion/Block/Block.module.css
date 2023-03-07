@@ -118,8 +118,19 @@
     margin-bottom: 0.6em;
     padding: 0;
     overflow: auto;
+    transition: all 0.2s ease-in-out;
     /* about 14px */
     font-size: 0.78em;
+
+    &::-webkit-scrollbar {
+      height: 0.5em;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-text-dimmed);
+      border-radius: 0.5em;
+    }
   }
 
   &.divider {
