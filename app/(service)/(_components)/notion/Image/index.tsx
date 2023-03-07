@@ -20,7 +20,7 @@ function calcCenterZoomTransform(
   return `translateY(${translateY}px) scale(${scale})`
 }
 
-export default function ImageBlock({ id, src, caption }) {
+export default function ImageBlock({ id, src, caption, size }) {
   const [isZoomed, setIsZoomed] = useState(false)
   const [imgProperty, setImgProperty] = useState({
     width: 1,
@@ -29,6 +29,7 @@ export default function ImageBlock({ id, src, caption }) {
     y: 0,
   })
   const { width, height } = useWindowSize()
+  const aspectRatio = size.width / size.height
   const transform = calcCenterZoomTransform(width, height, imgProperty)
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export default function ImageBlock({ id, src, caption }) {
   return (
     <>
       <div className={cx('root', { zoom: isZoomed })} onClick={handleClick}>
-        <figure className={cx('figure')}>
+        <figure className={cx('figure')} style={{ aspectRatio }}>
           <Image
             id={id}
             className={cx('image', { zoom: isZoomed })}

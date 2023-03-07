@@ -1,19 +1,17 @@
 .root {
   width: 100%;
   height: auto;
+  margin-bottom: 2em;
   cursor: zoom-in;
 
   .figure {
     width: 100%;
-    height: auto !important;
     margin: 0;
     position: relative;
 
     .image {
       width: 100%;
-      height: auto !important;
       object-fit: contain;
-      position: relative !important;
       border-radius: var(--border-radius);
       transition: all 0.3s;
 
@@ -23,6 +21,11 @@
         cursor: zoom-out;
         z-index: 12;
       }
+    }
+
+    figcaption {
+      position: absolute;
+      top: 100%;
     }
   }
 }

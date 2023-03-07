@@ -1,5 +1,5 @@
 import RenderBlocks from './RenderBlocks'
-import Image from '@components/notion/Image'
+import ImageBlock from '@components/notion/Image'
 import Text from '@components/notion/Text'
 import Code from '@components/notion/Code'
 import Callout from '@components/notion/Callout'
@@ -9,6 +9,7 @@ import { BlockMath } from 'react-katex'
 
 import { queryChildrenBlocks } from '@root/shared/notion'
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import probe from 'probe-image-size'
 
 import classNames from 'classnames/bind'
 import styles from './Block.module.css'
@@ -127,8 +128,18 @@ export default async function Block({ block, classNames }: Props) {
     case 'image':
       const src = value.type === 'external' ? value?.external?.url : value?.file?.url
       const caption = value?.caption ? value.caption[0]?.plain_text : ''
+      const size = await probe(src)
 
-      content = <Image id={id} src={src} caption={caption} />
+      content = (
+        <ImageBlock
+          {...{
+            id,
+            src,
+            caption,
+            size,
+          }}
+        />
+      )
       break
 
     case 'divider':
