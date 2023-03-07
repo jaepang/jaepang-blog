@@ -1,5 +1,7 @@
 'use client'
 
+import Image from 'next/image'
+
 import { useState, useEffect } from 'react'
 import { useWindowSize } from '@hooks/useWindowSize'
 
@@ -13,11 +15,7 @@ function calcCenterZoomTransform(
   imgProperty: { width: number; height: number; x: number; y: number },
 ) {
   const scale = Math.min(width / imgProperty.width, height / imgProperty.height)
-  const translateY =
-    -imgProperty.y +
-    (imgProperty.width <= imgProperty.height
-      ? (imgProperty.height * (scale - 1)) / 2
-      : (height - imgProperty.height) / 2)
+  const translateY = -imgProperty.y + (height - imgProperty.height) / 2
 
   return `translateY(${translateY}px) scale(${scale})`
 }
@@ -35,9 +33,15 @@ export default function ImageBlock({ id, src, caption }) {
 
   useEffect(() => {
     if (window) {
-      window.onscroll = () => setIsZoomed(false)
+      window.addEventListener('scroll', () => setIsZoomed(false))
     }
-  })
+
+    return () => {
+      if (window) {
+        window.removeEventListener('scroll', () => setIsZoomed(false))
+      }
+    }
+  }, [])
 
   useEffect(() => {
     if (document) {
@@ -56,14 +60,15 @@ export default function ImageBlock({ id, src, caption }) {
     <>
       <div className={cx('root', { zoom: isZoomed })} onClick={handleClick}>
         <figure className={cx('figure')}>
-          <img
+          <Image
             id={id}
             className={cx('image', { zoom: isZoomed })}
             src={src}
-            alt={caption}
+            alt={caption ?? ''}
             style={{
               transform: isZoomed ? transform : 'none',
             }}
+            fill
           />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
