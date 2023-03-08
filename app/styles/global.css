@@ -26,10 +26,6 @@ button {
 
 code {
   font-size: 0.75rem;
-  @supports (-webkit-touch-callout: none) {
-    /* CSS specific to iOS devices */
-    line-height: 1.2em !important;
-  }
 }
 
 h1 {

@@ -49,6 +49,7 @@ export default function Code({ value, children }) {
     marginBottom: '0',
     padding: '0.9em 0',
     fontSize: '1.5em', // set padding size; default: 1em
+    lineHeight: '0',
     borderRadius: 'var(--border-radius)',
     paddingLeft: width <= 732 ? '0.75em' : '0',
   }
