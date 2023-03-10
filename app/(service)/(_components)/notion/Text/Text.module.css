@@ -1,5 +1,5 @@
 .text {
-  width: 100%;
+  width: auto;
 
   span {
     display: inline-block;
@@ -8,15 +8,19 @@
   &.bold {
     font-weight: bold;
   }
+
   &.italic {
     font-style: italic;
   }
+
   &.underline {
     text-decoration: underline;
   }
+
   &.strikethrough {
     text-decoration: line-through;
   }
+
   &.code {
     padding: 4px 5px;
     font-size: 0.9em;
@@ -24,8 +28,8 @@
     color: #eb5757;
     border-radius: 4px;
     font-family: 'SFMono-Regular', Menlo, Consolas, 'PT Mono', 'Liberation Mono', Courier, monospace;
-    white-space: nowrap;
   }
+
   &.link {
     text-decoration: none;
     border-bottom: 0.05em solid;

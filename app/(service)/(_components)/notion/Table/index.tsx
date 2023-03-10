@@ -23,6 +23,15 @@ export default function Table({ table, childrenBlocks }: Props) {
   const { width } = useWindowSize()
   const paddingLeft = width > 732 ? (width - 700) / 2 : '16px'
   const rows = childrenBlocks as TableRowBlockObjectResponse[]
+  const columns = rows[0].table_row.cells.length
+  const data = []
+  rows.forEach(row => {
+    const cells = row.table_row.cells
+    cells.forEach(cell => {
+      data.push(<Text text={cell} />)
+    })
+    data.push(undefined)
+  })
 
   return (
     <>
@@ -30,32 +39,20 @@ export default function Table({ table, childrenBlocks }: Props) {
         className={cx('root')}
         style={{
           paddingLeft,
+          gridTemplateColumns: `repeat(${columns + 1}, minmax(150px, max-content))`,
+          gridTemplateRows: `repeat(${rows.length}, minmax(50px, auto))`,
         }}>
-        {rows.map((row, rowIndex) => {
-          const { table_row: tableRow } = row
-          return (
-            <div
-              key={row.id}
-              className={cx('row', {
-                highlight: rowIndex === 0 && has_row_header,
-              })}
-              style={{
-                // +1: bumper
-                gridTemplateColumns: `repeat(${tableRow.cells.length + 1}, 15%)`,
-              }}>
-              {tableRow.cells.map((cell, cellIndex) => (
-                <div
-                  key={`${row.id}-${cellIndex}`}
-                  className={cx('cell', {
-                    highlight: cellIndex === 0 && has_column_header,
-                  })}>
-                  <Text text={cell} />
-                </div>
-              ))}
-              <div className={cx('bumper')} />
-            </div>
-          )
-        })}
+        {data?.map((cell, idx) => (
+          <div
+            key={idx}
+            className={cx('cell', {
+              'last-row': idx >= data.length - columns - 1,
+              highlight: (has_column_header && idx % (columns + 1) === 0) || (has_row_header && idx < columns + 1),
+              bumper: (idx + 1) % (columns + 1) === 0,
+            })}>
+            {cell}
+          </div>
+        ))}
       </div>
     </>
   )
