@@ -10,6 +10,7 @@ import { BlockMath } from 'react-katex'
 import { queryChildrenBlocks } from '@root/shared/notion'
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import probe from 'probe-image-size'
+import { getPlaiceholder } from 'plaiceholder'
 
 import classNames from 'classnames/bind'
 import styles from './Block.module.css'
@@ -129,12 +130,20 @@ export default async function Block({ block, classNames }: Props) {
       const src = value.type === 'external' ? value?.external?.url : value?.file?.url
       const caption = value?.caption ? value.caption[0]?.plain_text : ''
       const size = await probe(src)
+      let blurSrc: string
+      try {
+        const { base64 } = await getPlaiceholder(src)
+        blurSrc = base64
+      } catch (e) {
+        blurSrc = undefined
+      }
 
       content = (
         <ImageBlock
           {...{
             id,
             src,
+            blurSrc,
             caption,
             size,
           }}

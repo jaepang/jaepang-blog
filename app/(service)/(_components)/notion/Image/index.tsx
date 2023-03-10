@@ -9,25 +9,30 @@ import classNames from 'classnames/bind'
 import styles from './Image.module.css'
 const cx = classNames.bind(styles)
 
-function calcCenterZoomTransform(
-  width: number,
-  height: number,
-  imgProperty: { width: number; height: number; x: number; y: number },
-) {
-  const scale = Math.min(width / imgProperty.width, height / imgProperty.height)
-  const translateY = -imgProperty.y + (height - imgProperty.height) / 2
-
-  return `translateY(${translateY}px) scale(${scale})`
+interface Props {
+  id: string
+  src: string
+  blurSrc?: string
+  caption?: string
+  size: {
+    width: number
+    height: number
+  }
 }
 
-export default function ImageBlock({ id, src, caption, size }) {
-  const [isZoomed, setIsZoomed] = useState(false)
-  const [imgProperty, setImgProperty] = useState({
-    width: 1,
-    height: 1,
-    x: 0,
-    y: 0,
-  })
+function calcCenterZoomTransform(width: number, height: number, imgProperty: DOMRect) {
+  if (imgProperty) {
+    const scale = Math.min(width / imgProperty.width, height / imgProperty.height)
+    const translateY = -imgProperty.y + (height - imgProperty.height) / 2
+
+    return `translateY(${translateY}px) scale(${scale})`
+  }
+  return 'none'
+}
+
+export default function ImageBlock({ id, src, blurSrc, caption, size }: Props) {
+  const [isZoomed, setIsZoomed] = useState<boolean>(false)
+  const [imgProperty, setImgProperty] = useState<DOMRect>(null)
   const { width, height } = useWindowSize()
   const aspectRatio = size.width / size.height
   const transform = calcCenterZoomTransform(width, height, imgProperty)
@@ -46,13 +51,13 @@ export default function ImageBlock({ id, src, caption, size }) {
 
   useEffect(() => {
     if (document) {
-      setImgProperty(document?.getElementById(id)?.getBoundingClientRect() ?? { width: 1, height: 1, x: 0, y: 0 })
+      setImgProperty(document?.getElementById(id)?.getBoundingClientRect())
     }
   }, [id])
 
   function handleClick() {
     if (document) {
-      setImgProperty(document?.getElementById(id)?.getBoundingClientRect() ?? { width: 1, height: 1, x: 0, y: 0 })
+      setImgProperty(document?.getElementById(id)?.getBoundingClientRect())
     }
     setIsZoomed(prev => !prev)
   }
@@ -70,6 +75,8 @@ export default function ImageBlock({ id, src, caption, size }) {
               transform: isZoomed ? transform : 'none',
             }}
             fill
+            placeholder={blurSrc ? 'blur' : 'empty'}
+            blurDataURL={blurSrc}
           />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
