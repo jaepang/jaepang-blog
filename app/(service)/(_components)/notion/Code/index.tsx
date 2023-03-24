@@ -22,6 +22,7 @@ const cx = classNames.bind(styles)
 export default function Code({ value, children }) {
   const [copied, setCopied] = useState(false)
   const { width } = useWindowSize()
+  const isMobile = width <= 732
 
   SyntaxHighlighter.registerLanguage('jsx', jsx)
   SyntaxHighlighter.registerLanguage('tsx', tsx)
@@ -63,7 +64,7 @@ export default function Code({ value, children }) {
         {copied ? <BsClipboardCheck /> : <BsClipboard />}
       </div>
       <SyntaxHighlighter
-        showLineNumbers={width > 732}
+        showLineNumbers={!isMobile}
         style={style}
         lineNumberStyle={lineNumberStyle}
         useInlineStyles={true}

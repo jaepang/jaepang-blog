@@ -53,8 +53,8 @@ export default function Text({ text }: TextProps) {
               code,
             })}
             style={{
-              color: !isBackgroundColor && color !== 'default' && `var(--color-text-${color})`,
-              backgroundColor: isBackgroundColor && `var(--color-bg-${color.slice(0, -11)})`,
+              color: !isBackgroundColor && color !== 'default' ? `var(--color-text-${color})` : 'none',
+              backgroundColor: isBackgroundColor ? `var(--color-bg-${color.slice(0, -11)})` : 'none',
             }}>
             {link ? <a href={link.url}>{body ?? ''}</a> : body ?? ''}
           </span>

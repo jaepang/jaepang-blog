@@ -24,7 +24,7 @@ export default function RenderBlocks({ blocks }: { blocks: BlockObjectResponse[]
       const listItems = blocks.slice(start, end)
 
       blockComponents.push(
-        <ol className={cx('list', { ordered: type === 'numbered_list_item' })}>
+        <ol key={idx} className={cx('list', { ordered: type === 'numbered_list_item' })}>
           {listItems.map(block => (
             /* @ts-expect-error Server Component */
             <Block key={block.id} block={block as BlockObjectResponse} />

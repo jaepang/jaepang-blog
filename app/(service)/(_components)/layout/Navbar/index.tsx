@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div className={cx('root')}>
       <div className={cx('logo-wrapper')}>
-        <Image src="/logo/logo.png" alt="jaepang" fill />
+        <Image src="/logo/logo.png" alt="jaepang" fill sizes="100%" />
       </div>
       <strong>jaepang</strong>
       {' dev'}
