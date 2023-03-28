@@ -12,7 +12,13 @@ export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any
     while (has_more && curPage < page) {
       res = await notion.databases.query({
         database_id,
-        filter,
+        filter: {
+          ...filter,
+          property: 'Status',
+          select: {
+            equals: '📰 Publish',
+          },
+        },
         start_cursor: cursor,
         page_size: PAGE_SIZE,
       })
@@ -39,7 +45,13 @@ export async function calcFeedPageSize(PAGE_SIZE: number, filter: any): Promise<
       const res = await notion.databases.query({
         database_id,
         start_cursor: cursor,
-        filter,
+        filter: {
+          ...filter,
+          property: 'Status',
+          select: {
+            equals: '📰 Publish',
+          },
+        },
       })
       cnt += res.results.length
       has_more = res.has_more

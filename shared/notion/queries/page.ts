@@ -17,7 +17,13 @@ export async function queryPageIds(filter: any): Promise<string[]> {
       res = await notion.databases.query({
         database_id,
         start_cursor: cursor,
-        filter,
+        filter: {
+          ...filter,
+          property: 'Status',
+          select: {
+            equals: '📰 Publish',
+          },
+        },
       })
       cursor = res.next_cursor
       has_more = res.has_more
@@ -42,4 +48,11 @@ export async function queryChildrenBlocks(parentId: string): Promise<ListBlockCh
   })
 
   return blocks
+}
+
+export async function updatePageProperty(pageId: string, property: any) {
+  return await notion.pages.update({
+    page_id: pageId,
+    properties: property,
+  })
 }
