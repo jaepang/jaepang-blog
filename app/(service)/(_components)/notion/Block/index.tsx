@@ -63,7 +63,7 @@ export default async function Block({ block, classNames }: Props) {
               <summary>
                 <span className={cx('summary-heading')}>{text}</span>
               </summary>
-              {children?.results.map(block => (
+              {children?.results?.map(block => (
                 /* @ts-expect-error Server Component */
                 <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
               ))}
@@ -83,7 +83,7 @@ export default async function Block({ block, classNames }: Props) {
               <summary>
                 <span className={cx('summary-heading')}>{text}</span>
               </summary>
-              {children?.results.map(block => (
+              {children?.results?.map(block => (
                 /* @ts-expect-error Server Component */
                 <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
               ))}
@@ -118,7 +118,7 @@ export default async function Block({ block, classNames }: Props) {
       content = (
         <details>
           <summary>{text}</summary>
-          {children?.results.map(block => (
+          {children?.results?.map(block => (
             /* @ts-expect-error Server Component */
             <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
           ))}
