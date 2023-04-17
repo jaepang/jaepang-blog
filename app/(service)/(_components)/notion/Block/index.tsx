@@ -43,7 +43,7 @@ export default async function Block({ block, classNames }: Props) {
               <summary>
                 <span className={cx('summary-heading')}>{text}</span>
               </summary>
-              {children?.results.map(block => (
+              {children?.results?.map(block => (
                 /* @ts-expect-error Server Component */
                 <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
               ))}
@@ -99,7 +99,7 @@ export default async function Block({ block, classNames }: Props) {
     case 'numbered_list_item':
       content = (
         <li>
-          <Text text={value.rich_text} />
+          {text}
           {children?.results && <RenderBlocks blocks={children?.results as BlockObjectResponse[]} />}
         </li>
       )
@@ -108,8 +108,8 @@ export default async function Block({ block, classNames }: Props) {
     case 'to_do':
       content = (
         <>
-          {value.checked ? <div className={cx('checkbox', 'checked')} /> : <div className={cx('checkbox')} />}
-          {value?.rich_text && <Text text={value.rich_text} />}
+          {value?.checked ? <div className={cx('checkbox', 'checked')} /> : <div className={cx('checkbox')} />}
+          {text}
         </>
       )
       break

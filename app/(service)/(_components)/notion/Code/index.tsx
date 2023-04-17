@@ -14,6 +14,7 @@ import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typesc
 import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript'
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
+import cpp from 'react-syntax-highlighter/dist/esm/languages/prism/cpp'
 
 import classNames from 'classnames/bind'
 import styles from './Code.module.css'
