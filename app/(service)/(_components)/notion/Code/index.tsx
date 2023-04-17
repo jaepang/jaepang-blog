@@ -31,6 +31,7 @@ export default function Code({ value, children }) {
   SyntaxHighlighter.registerLanguage('javascript', javascript)
   SyntaxHighlighter.registerLanguage('python', python)
   SyntaxHighlighter.registerLanguage('css', css)
+  SyntaxHighlighter.registerLanguage('c++', cpp)
 
   function copyToClipboard() {
     if (navigator?.clipboard) {

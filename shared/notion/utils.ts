@@ -1,5 +1,5 @@
 import { PageObjectResponse, TextRichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
-import { generateDescription } from './ai/generateDescription'
+import { generateDescription, translate } from './ai/generateDescription'
 import { updatePageProperty } from './queries'
 import { Title } from './types'
 
@@ -59,7 +59,7 @@ export async function getPagePropertiesString(properties: any) {
 }
 
 export async function generateAndUpdateDescription(page: PageObjectResponse) {
-  const description = await generateDescription(page)
+  const description = await translate(await generateDescription(page), 'korean')
 
   const newDescription = page.properties.description as any
   const richText = { text: { content: description } } as TextRichTextItemResponse
