@@ -5,7 +5,7 @@ import {
   ListBlockChildrenResponse,
 } from '@notionhq/client/build/src/api-endpoints'
 
-export async function queryPageIds(filter: any): Promise<string[]> {
+export async function queryPageIds(filter: any[]): Promise<string[]> {
   const database_id = process.env.NOTION_DATABASE_ID
   let cursor = undefined
   let has_more = true
@@ -18,11 +18,15 @@ export async function queryPageIds(filter: any): Promise<string[]> {
         database_id,
         start_cursor: cursor,
         filter: {
-          ...filter,
-          property: 'Status',
-          select: {
-            equals: '📰 Publish',
-          },
+          and: [
+            ...(filter ?? []),
+            {
+              property: 'Status',
+              select: {
+                equals: '📰 Publish',
+              },
+            },
+          ],
         },
       })
       cursor = res.next_cursor

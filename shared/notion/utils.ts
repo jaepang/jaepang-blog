@@ -1,6 +1,6 @@
 import { PageObjectResponse, TextRichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
 import { generateDescription, translate } from './ai/generateDescription'
-import { updatePageProperty } from './queries'
+import { retrieveDatabase, updatePageProperty } from './queries'
 import { Title } from './types'
 
 export function getPropertyKeyByType(object: Object, type: string) {
@@ -70,4 +70,11 @@ export async function generateAndUpdateDescription(page: PageObjectResponse) {
   } catch {
     /** do_nothing */
   }
+}
+
+export async function extractDabaseTags(tagPropertyName: string): Promise<string[]> {
+  const { properties } = await retrieveDatabase()
+  const tagProperty = properties[tagPropertyName]
+  const { options } = tagProperty['multi_select']
+  return options.map(option => option.name)
 }

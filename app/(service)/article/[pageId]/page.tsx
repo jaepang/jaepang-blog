@@ -9,7 +9,7 @@ import classNames from 'classnames/bind'
 import styles from './ArticlePage.module.css'
 const cx = classNames.bind(styles)
 
-export const revalidate = 60
+export const revalidate = 600
 export async function generateStaticParams() {
   const pageIds = await queryPageIds(undefined)
   return pageIds.map(pageId => ({ pageId: pageId }))
@@ -21,7 +21,7 @@ export default async function ArticlePage({ params }: { params: { pageId: string
   const descRichText = (page.properties.description as any)?.rich_text
 
   if (descRichText?.length === 0 || descRichText?.[0].plain_text === '') {
-    generateAndUpdateDescription(page)
+    await generateAndUpdateDescription(page)
   }
 
   return (

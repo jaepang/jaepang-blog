@@ -12,7 +12,6 @@ const headers = {
   Cookie: `token_v2=${tokenV2}`,
 }
 const bodySkeleton = {
-  id: uuid(),
   model: 'openai-3',
   spaceId: process.env.NOTION_SPACE_ID,
   isSpacePermission: true,
@@ -42,6 +41,7 @@ export async function generateDescription(page: PageObjectResponse) {
   const content = n2m.toMarkdownString(mdBlocks)
 
   const body = {
+    id: uuid(),
     ...bodySkeleton,
     context: {
       type: 'summarize',
@@ -74,7 +74,9 @@ type language =
   | 'tagalog'
   | 'vietnamese'
 export async function translate(text: string, language: language) {
+  if (!text) return ''
   const body = {
+    id: uuid(),
     ...bodySkeleton,
     context: {
       type: 'translate',

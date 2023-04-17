@@ -1,7 +1,12 @@
 import { notion } from '@shared/notion'
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
-export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any): Promise<PageObjectResponse[]> {
+export async function retrieveDatabase() {
+  const database_id = process.env.NOTION_DATABASE_ID
+  return await notion.databases.retrieve({ database_id })
+}
+
+export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any[]): Promise<PageObjectResponse[]> {
   const database_id = process.env.NOTION_DATABASE_ID
   let cursor = undefined
   let has_more = true
@@ -13,11 +18,15 @@ export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any
       res = await notion.databases.query({
         database_id,
         filter: {
-          ...filter,
-          property: 'Status',
-          select: {
-            equals: '📰 Publish',
-          },
+          and: [
+            ...(filter ?? []),
+            {
+              property: 'Status',
+              select: {
+                equals: '📰 Publish',
+              },
+            },
+          ],
         },
         start_cursor: cursor,
         page_size: PAGE_SIZE,
@@ -31,7 +40,7 @@ export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any
   return (res?.results as PageObjectResponse[]) ?? []
 }
 
-export async function calcFeedPageSize(PAGE_SIZE: number, filter: any): Promise<number> {
+export async function calcFeedPageSize(PAGE_SIZE: number, filter: any[]): Promise<number> {
   /** pretty slow, but there are no way of fetching database size */
   /** used on static site generation */
   const database_id = process.env.NOTION_DATABASE_ID
@@ -46,11 +55,15 @@ export async function calcFeedPageSize(PAGE_SIZE: number, filter: any): Promise<
         database_id,
         start_cursor: cursor,
         filter: {
-          ...filter,
-          property: 'Status',
-          select: {
-            equals: '📰 Publish',
-          },
+          and: [
+            ...(filter ?? []),
+            {
+              property: 'Status',
+              select: {
+                equals: '📰 Publish',
+              },
+            },
+          ],
         },
       })
       cnt += res.results.length
