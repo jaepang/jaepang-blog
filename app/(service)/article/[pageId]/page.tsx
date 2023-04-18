@@ -1,7 +1,7 @@
 import RenderBlocks from '@components/notion/Block/RenderBlocks'
 import Header from '../Header'
 
-import { queryChildrenBlocks, queryPageIds, retrerivePage, updatePageProperty } from '@shared/notion'
+import { queryChildrenBlocks, queryPageIds, retrerivePage } from '@shared/notion'
 import { generateAndUpdateDescription } from '@shared/notion'
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 

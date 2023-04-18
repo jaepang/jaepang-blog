@@ -16,7 +16,7 @@ export async function generateStaticParams() {
   const tags = await extractDabaseTags(tagPropertyName)
   const params = []
 
-  tags.forEach(async tag => {
+  for (const tag of tags) {
     const maxPage = await calcFeedPageSize(10, [
       {
         property: tagPropertyName,
@@ -26,12 +26,13 @@ export async function generateStaticParams() {
       },
     ])
     params.push(
-      Array.from({ length: maxPage }, (_, i) => i + 1).map(page => ({
+      ...Array.from({ length: maxPage }, (_, i) => i + 1).map(page => ({
         tag,
         page: page.toString(),
       })),
     )
-  })
+  }
+  console.log(tags, params)
 
   return params
 }
