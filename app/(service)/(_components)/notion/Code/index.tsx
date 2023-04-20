@@ -31,7 +31,7 @@ export default function Code({ value, children }) {
   SyntaxHighlighter.registerLanguage('javascript', javascript)
   SyntaxHighlighter.registerLanguage('python', python)
   SyntaxHighlighter.registerLanguage('css', css)
-  SyntaxHighlighter.registerLanguage('c++', cpp)
+  SyntaxHighlighter.registerLanguage('cpp', cpp)
 
   function copyToClipboard() {
     if (navigator?.clipboard) {
@@ -47,7 +47,7 @@ export default function Code({ value, children }) {
     }
   }
 
-  const language = value.language?.toLowerCase() || 'text'
+  const language = (value.language?.toLowerCase() || 'text').replace('++', 'pp')
   const customStyle = {
     marginBottom: '0',
     padding: '0.9em 0',
