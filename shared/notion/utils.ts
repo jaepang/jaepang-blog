@@ -2,6 +2,7 @@ import { PageObjectResponse, TextRichTextItemResponse } from '@notionhq/client/b
 import { generateDescription, translate } from './ai/generateDescription'
 import { retrieveDatabase, updatePageProperty } from './queries'
 import { Title } from './types'
+import { v4 as uuid } from 'uuid'
 
 export function getPropertyKeyByType(object: Object, type: string) {
   return Object.keys(object).find(key => object[key].type === type)
@@ -63,11 +64,13 @@ export async function generateAndUpdateDescription(page: PageObjectResponse) {
 
   const newDescription = page.properties.description as any
   const richText = { text: { content: description } } as TextRichTextItemResponse
+  newDescription.id = uuid()
   newDescription.rich_text.push(richText)
 
   try {
     await updatePageProperty(page.id, { description: newDescription })
-  } catch {
+  } catch (e) {
+    console.log(e)
     /** do_nothing */
   }
 }

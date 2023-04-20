@@ -4,12 +4,6 @@ import Pagination from '@components/Pagination'
 import { queryDatabase, calcFeedPageSize } from '@shared/notion'
 import { extractDabaseTags } from '@shared/notion'
 
-/*
-import classNames from 'classnames/bind'
-import styles from './FeedPageComponent.module.css'
-const cx = classNames.bind(styles)
-*/
-
 const tagPropertyName = 'tag'
 export const revalidate = 600
 export async function generateStaticParams() {
@@ -32,7 +26,6 @@ export async function generateStaticParams() {
       })),
     )
   }
-  console.log(tags, params)
 
   return params
 }
@@ -55,7 +48,7 @@ export default async function FeedPageComponent({ params }: { params: { tag: str
       {pages.map(page => (
         <PageCard key={page.id} page={page} />
       ))}
-      <Pagination tag={params.tag} maxPageSize={maxPage} />
+      <Pagination tag={params.tag} curPage={page} maxPageSize={maxPage} />
     </div>
   )
 }

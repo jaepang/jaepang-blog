@@ -1,13 +1,22 @@
 import Link from 'next/link'
 
-export default function Pagination({ tag, maxPageSize }) {
+interface Props {
+  tag: string
+  curPage: number
+  maxPageSize: number
+}
+const numOfPadPages = 2
+
+export default function Pagination({ tag, curPage, maxPageSize }: Props) {
+  const from = Math.max(1, curPage - numOfPadPages)
+  const to = Math.min(maxPageSize, curPage + numOfPadPages)
   return (
     <div>
-      {Array(maxPageSize)
+      {Array(to - from + 1)
         .fill(0)
         .map((_, i) => (
-          <Link key={i} href={`/${tag}/${i + 1}`}>
-            {i + 1}
+          <Link key={from + i} href={`/${tag}/${from + i}`}>
+            {from + i}
           </Link>
         ))}
     </div>
