@@ -4,6 +4,7 @@ import Image from 'next/image'
 
 import { useState, useEffect } from 'react'
 import { useWindowSize } from '@hooks/useWindowSize'
+import { IMAGE_SIZES } from '@shared/consts'
 
 import classNames from 'classnames/bind'
 import styles from './Image.module.css'
@@ -75,6 +76,7 @@ export default function ImageBlock({ id, src, blurSrc, caption, size }: Props) {
               transform: isZoomed ? transform : 'none',
             }}
             fill
+            sizes={IMAGE_SIZES}
             placeholder={blurSrc ? 'blur' : 'empty'}
             blurDataURL={blurSrc}
           />

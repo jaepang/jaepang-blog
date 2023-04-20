@@ -6,13 +6,14 @@ import { queryDatabase, calcFeedPageSize } from '@shared/notion'
 import { extractDabaseTags } from '@shared/utils/notion'
 
 const tagPropertyName = 'tag'
+const postsPerPage = 10
 export const revalidate = 600
 export async function generateStaticParams() {
   const tags = await extractDabaseTags(tagPropertyName)
   const params = []
 
   for (const tag of tags) {
-    const maxPage = await calcFeedPageSize(10, [
+    const maxPage = await calcFeedPageSize(postsPerPage, [
       {
         property: tagPropertyName,
         multi_select: {
@@ -33,23 +34,25 @@ export async function generateStaticParams() {
 
 export default async function FeedPageComponent({ params }: { params: { tag: string; page: string } }) {
   const page = parseInt(params.page)
+  const { tag } = params
   const filter = [
     {
       property: tagPropertyName,
       multi_select: {
-        contains: params.tag,
+        contains: tag,
       },
     },
   ]
-  const pages = await queryDatabase(10, page, filter)
-  const maxPage = await calcFeedPageSize(10, filter)
+  const pages = await queryDatabase(postsPerPage, page, filter)
+  const maxPage = await calcFeedPageSize(postsPerPage, filter)
 
   return (
-    <Row type={ROW_TYPE.FULL_SCREEN}>
+    <Row type={ROW_TYPE.WIDE}>
+      <h1>{tag}</h1>
       {pages.map(page => (
         <PageCard key={page.id} page={page} />
       ))}
-      <Pagination tag={params.tag} curPage={page} maxPageSize={maxPage} />
+      <Pagination tag={tag} curPage={page} maxPageSize={maxPage} />
     </Row>
   )
 }

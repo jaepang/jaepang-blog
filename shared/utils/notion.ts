@@ -20,6 +20,15 @@ export function getTitlePlaintext(page: PageObjectResponse): string {
   return title ?? ''
 }
 
+export function getCoverImageSrc(page: PageObjectResponse): string {
+  if (page.cover?.type === 'external') {
+    return page.cover?.external?.url
+  } else if (page.cover?.type === 'file') {
+    return page.cover?.file?.url
+  }
+  return ''
+}
+
 export async function getPagePropertiesString(properties: any) {
   const propertiesString = Object.keys(properties).reduce((acc, key) => {
     const property = properties[key]

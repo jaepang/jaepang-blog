@@ -4,6 +4,7 @@ const cx = classNames.bind(styles)
 
 export enum ROW_TYPE {
   FULL_SCREEN = 'full-screen',
+  WIDE = 'wide',
   NORMAL = 'normal',
 }
 

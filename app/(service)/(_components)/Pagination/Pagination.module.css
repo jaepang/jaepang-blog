@@ -1,5 +1,6 @@
 .root {
   margin: 0 auto;
+  margin-bottom: 2em;
   display: flex;
   justify-content: center;
   align-items: center;

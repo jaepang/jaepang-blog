@@ -46,7 +46,6 @@ export async function calcFeedPageSize(PAGE_SIZE: number, filter: any[]): Promis
   const database_id = process.env.NOTION_DATABASE_ID
   let cnt = 0
   let has_more = true
-  let reqs = 0
   let cursor = undefined
 
   if (database_id) {
@@ -69,7 +68,6 @@ export async function calcFeedPageSize(PAGE_SIZE: number, filter: any[]): Promis
       cnt += res.results.length
       has_more = res.has_more
       cursor = res.next_cursor
-      reqs++
     }
   }
 
