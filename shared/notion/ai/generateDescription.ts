@@ -1,7 +1,7 @@
 import { notion } from '@shared/notion'
 import { NotionToMarkdown } from 'notion-to-md'
 import { v4 as uuid } from 'uuid'
-import { getTitlePlaintext, getPagePropertiesString } from '@shared/notion/utils'
+import { getTitlePlaintext, getPagePropertiesString } from '@shared/utils/notion'
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 
 const url = 'https://www.notion.so/api/v3/getCompletion'

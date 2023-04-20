@@ -1,7 +1,7 @@
 import { PageObjectResponse, TextRichTextItemResponse } from '@notionhq/client/build/src/api-endpoints'
-import { generateDescription, translate } from './ai/generateDescription'
-import { retrieveDatabase, updatePageProperty } from './queries'
-import { Title } from './types'
+import { generateDescription, translate } from '../notion/ai/generateDescription'
+import { retrieveDatabase, updatePageProperty } from '../notion/queries'
+import { Title } from '../notion/types'
 import { v4 as uuid } from 'uuid'
 
 export function getPropertyKeyByType(object: Object, type: string) {

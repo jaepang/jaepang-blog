@@ -6,5 +6,4 @@ export const notion = new Client({
 })
 
 export * from './queries'
-export * from './utils'
 export * from './types'

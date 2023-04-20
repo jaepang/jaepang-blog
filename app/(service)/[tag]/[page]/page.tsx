@@ -1,8 +1,9 @@
+import Row, { ROW_TYPE } from '@components/layout/Row'
 import PageCard from '@components/PageCard'
 import Pagination from '@components/Pagination'
 
 import { queryDatabase, calcFeedPageSize } from '@shared/notion'
-import { extractDabaseTags } from '@shared/notion'
+import { extractDabaseTags } from '@shared/utils/notion'
 
 const tagPropertyName = 'tag'
 export const revalidate = 600
@@ -44,11 +45,11 @@ export default async function FeedPageComponent({ params }: { params: { tag: str
   const maxPage = await calcFeedPageSize(10, filter)
 
   return (
-    <div>
+    <Row type={ROW_TYPE.FULL_SCREEN}>
       {pages.map(page => (
         <PageCard key={page.id} page={page} />
       ))}
       <Pagination tag={params.tag} curPage={page} maxPageSize={maxPage} />
-    </div>
+    </Row>
   )
 }

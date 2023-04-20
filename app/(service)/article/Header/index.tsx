@@ -1,7 +1,7 @@
 import CreatedAt from './CreatedAt'
 
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
-import { getTitlePlaintext } from '@root/shared/notion'
+import { getTitlePlaintext } from '@shared/utils/notion'
 
 import classNames from 'classnames/bind'
 import styles from './Header.module.css'
