@@ -47,7 +47,7 @@ export default function Code({ value, children }) {
     }
   }
 
-  const language = (value.language?.toLowerCase() || 'text').replace('++', 'pp')
+  const language = value.language?.toLowerCase() || 'text'
   const customStyle = {
     marginBottom: '0',
     padding: '0.9em 0',
@@ -70,7 +70,7 @@ export default function Code({ value, children }) {
         style={style}
         lineNumberStyle={lineNumberStyle}
         useInlineStyles={true}
-        language={language}
+        language={language.replace('++', 'pp')}
         customStyle={customStyle}>
         {children}
       </SyntaxHighlighter>
