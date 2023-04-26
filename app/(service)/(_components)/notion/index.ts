@@ -1,7 +1,9 @@
-export * from './Block'
-export * from './Callout'
-export * from './Code'
-export * from './Image'
-export * from './Table'
-export * from './Text'
-export * from './Toggle'
+import Block from './Block'
+import Callout from './Callout'
+import Code from './Code'
+import ImageBlock from './Image'
+import Table from './Table'
+import Text from './Text'
+import ToggleContent from './Toggle'
+
+export { Block, Callout, Code, ImageBlock, Table, Text, ToggleContent }

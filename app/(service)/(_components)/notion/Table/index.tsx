@@ -1,6 +1,6 @@
 'use client'
 
-import { Text } from '@components/notion'
+import Text from '@components/notion/Text'
 
 import { BlockObjectResponse, TableRowBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { useWindowSize } from '@hooks/useWindowSize'
@@ -18,7 +18,7 @@ interface Props {
   childrenBlocks: BlockObjectResponse[]
 }
 
-export function Table({ table, childrenBlocks }: Props) {
+export default function Table({ table, childrenBlocks }: Props) {
   const { has_column_header, has_row_header } = table
   const { width } = useWindowSize()
   const paddingLeft = width > 732 ? `${(width - 700) / 2}px` : '16px'
@@ -34,26 +34,24 @@ export function Table({ table, childrenBlocks }: Props) {
   })
 
   return (
-    <>
-      <div
-        className={cx('root')}
-        style={{
-          paddingLeft,
-          gridTemplateColumns: `repeat(${columns + 1}, minmax(150px, max-content))`,
-          gridTemplateRows: `repeat(${rows.length}, minmax(50px, auto))`,
-        }}>
-        {data?.map((cell, idx) => (
-          <div
-            key={idx}
-            className={cx('cell', {
-              'last-row': idx >= data.length - columns - 1,
-              highlight: (has_column_header && idx % (columns + 1) === 0) || (has_row_header && idx < columns + 1),
-              bumper: (idx + 1) % (columns + 1) === 0,
-            })}>
-            {cell}
-          </div>
-        ))}
-      </div>
-    </>
+    <div
+      className={cx('root')}
+      style={{
+        paddingLeft,
+        gridTemplateColumns: `repeat(${columns + 1}, minmax(150px, max-content))`,
+        gridTemplateRows: `repeat(${rows.length}, minmax(50px, auto))`,
+      }}>
+      {data?.map((cell, idx) => (
+        <div
+          key={idx}
+          className={cx('cell', {
+            'last-row': idx >= data.length - columns - 1,
+            highlight: (has_column_header && idx % (columns + 1) === 0) || (has_row_header && idx < columns + 1),
+            bumper: (idx + 1) % (columns + 1) === 0,
+          })}>
+          {cell}
+        </div>
+      ))}
+    </div>
   )
 }

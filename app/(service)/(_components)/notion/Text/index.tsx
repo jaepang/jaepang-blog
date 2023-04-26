@@ -15,7 +15,7 @@ interface Props {
   text: RichTextItemResponse[]
 }
 
-export function Text({ text }: Props) {
+export default function Text({ text }: Props) {
   if (!text) return null
 
   function isText(value: any): value is TextRichTextItemResponse {

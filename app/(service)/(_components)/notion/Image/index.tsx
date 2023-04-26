@@ -31,7 +31,7 @@ function calcCenterZoomTransform(width: number, height: number, imgProperty: DOM
   return 'none'
 }
 
-export function ImageBlock({ id, src, blurSrc, caption, size }: Props) {
+export default function ImageBlock({ id, src, blurSrc, caption, size }: Props) {
   const [isZoomed, setIsZoomed] = useState<boolean>(false)
   const [imgProperty, setImgProperty] = useState<DOMRect>(null)
   const { width, height } = useWindowSize()

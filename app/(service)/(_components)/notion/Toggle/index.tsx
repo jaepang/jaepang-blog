@@ -1,4 +1,4 @@
-import Block from '../Block'
+import Block from '@components/notion/Block'
 
 import { BlockObjectResponse, ListBlockChildrenResponse } from '@notionhq/client/build/src/api-endpoints'
 
@@ -8,7 +8,7 @@ interface Props {
   summaryClassName?: string
 }
 
-export function ToggleContent({ summary, detail, summaryClassName }: Props) {
+export default function ToggleContent({ summary, detail, summaryClassName }: Props) {
   return (
     <>
       <summary className={summaryClassName}>{summary}</summary>
