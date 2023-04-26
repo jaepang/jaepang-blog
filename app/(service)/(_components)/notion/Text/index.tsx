@@ -11,11 +11,11 @@ import classNames from 'classnames/bind'
 import styles from './Text.module.css'
 const cx = classNames.bind(styles)
 
-interface TextProps {
+interface Props {
   text: RichTextItemResponse[]
 }
 
-export default function Text({ text }: TextProps) {
+export function Text({ text }: Props) {
   if (!text) return null
 
   function isText(value: any): value is TextRichTextItemResponse {

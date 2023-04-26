@@ -18,7 +18,7 @@ export default function PageCard({ page }: { page: PageObjectResponse }) {
       <div className={cx('root')}>
         {cover && (
           <div className={cx('cover')}>
-            <Image priority src={cover} alt="title" fill className={cx('img')} sizes={IMAGE_SIZES} />
+            <Image priority src={cover} alt="title" fill className={cx('img')} />
           </div>
         )}
         <h2 className={cx('title')}>{title}</h2>

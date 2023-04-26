@@ -20,7 +20,7 @@ import classNames from 'classnames/bind'
 import styles from './Code.module.css'
 const cx = classNames.bind(styles)
 
-export default function Code({ value, children }) {
+export function Code({ value, children }) {
   const [copied, setCopied] = useState(false)
   const { width } = useWindowSize()
   const isMobile = width <= 732

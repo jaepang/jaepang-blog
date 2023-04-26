@@ -1,6 +1,6 @@
 'use client'
 
-import Text from '@components/notion/Text'
+import { Text } from '@components/notion'
 
 import { BlockObjectResponse, TableRowBlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { useWindowSize } from '@hooks/useWindowSize'
@@ -18,7 +18,7 @@ interface Props {
   childrenBlocks: BlockObjectResponse[]
 }
 
-export default function Table({ table, childrenBlocks }: Props) {
+export function Table({ table, childrenBlocks }: Props) {
   const { has_column_header, has_row_header } = table
   const { width } = useWindowSize()
   const paddingLeft = width > 732 ? `${(width - 700) / 2}px` : '16px'

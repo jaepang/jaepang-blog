@@ -1,13 +1,10 @@
 import RenderBlocks from './RenderBlocks'
-import ImageBlock from '@components/notion/Image'
-import Text from '@components/notion/Text'
-import Code from '@components/notion/Code'
-import Callout from '@components/notion/Callout'
-import Table from '@components/notion/Table'
-import 'katex/dist/katex.min.css'
+import { Callout, Code, ImageBlock, Table, Text, ToggleContent } from '@components/notion'
 import { BlockMath } from 'react-katex'
+import 'katex/dist/katex.min.css'
 
-import { queryChildrenBlocks } from '@root/shared/notion'
+import { ElementType } from 'react'
+import { queryChildrenBlocks } from '@shared/notion'
 import { BlockObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import probe from 'probe-image-size'
 import { getPlaiceholder } from 'plaiceholder'
@@ -24,106 +21,58 @@ interface Props {
 export default async function Block({ block, classNames }: Props) {
   const { type, id, has_children } = block
   const value = block[type]
-
   const children = has_children && (await queryChildrenBlocks(id))
-
-  let content: JSX.Element
   const text = value?.rich_text && <Text text={value.rich_text} />
+  let Element: ElementType = 'div'
+  let content: JSX.Element = text
 
   switch (type) {
     case 'paragraph':
-      content = <p>{text}</p>
+      Element = 'p'
+      break
+    case 'quote':
+      Element = 'blockquote'
+      break
+    case 'divider':
+      content = <></>
       break
 
     case 'heading_1':
-      content = (
-        <>
-          {value?.is_toggleable ? (
-            <details>
-              <summary>
-                <span className={cx('summary-heading')}>{text}</span>
-              </summary>
-              {children?.results?.map(block => (
-                /* @ts-expect-error Server Component */
-                <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
-              ))}
-            </details>
-          ) : (
-            <h1>{text}</h1>
-          )}
-        </>
-      )
-      break
-
     case 'heading_2':
-      content = (
-        <>
-          {value?.is_toggleable ? (
-            <details>
-              <summary>
-                <span className={cx('summary-heading')}>{text}</span>
-              </summary>
-              {children?.results?.map(block => (
-                /* @ts-expect-error Server Component */
-                <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
-              ))}
-            </details>
-          ) : (
-            <h2>{text}</h2>
-          )}
-        </>
-      )
-      break
-
     case 'heading_3':
-      content = (
-        <>
-          {value?.is_toggleable ? (
-            <details>
-              <summary>
-                <span className={cx('summary-heading')}>{text}</span>
-              </summary>
-              {children?.results?.map(block => (
-                /* @ts-expect-error Server Component */
-                <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
-              ))}
-            </details>
-          ) : (
-            <h3>{text}</h3>
-          )}
-        </>
+      const Heading: ElementType = type === 'heading_1' ? 'h1' : type === 'heading_2' ? 'h2' : 'h3'
+      const isToggle = value?.is_toggleable
+      Element = isToggle ? 'details' : Heading
+      content = isToggle ? (
+        <ToggleContent summary={text} detail={children} summaryClassName={cx('summary-heading')} />
+      ) : (
+        text
       )
       break
 
     case 'bulleted_list_item':
     case 'numbered_list_item':
+      Element = 'li'
       content = (
-        <li>
+        <>
           {text}
           {children?.results && <RenderBlocks blocks={children?.results as BlockObjectResponse[]} />}
-        </li>
+        </>
       )
       break
 
     case 'to_do':
       content = (
         <>
-          {value?.checked ? <div className={cx('checkbox', 'checked')} /> : <div className={cx('checkbox')} />}
+          <div className={cx('checkbox', { checked: value?.checked })} />
           {text}
         </>
       )
       break
 
     case 'toggle':
-      content = (
-        <details>
-          <summary>{text}</summary>
-          {children?.results?.map(block => (
-            /* @ts-expect-error Server Component */
-            <Block key={block.id} block={block as BlockObjectResponse} classNames="summary" />
-          ))}
-        </details>
-      )
+      Element = 'details'
+      content = <ToggleContent summary={text} detail={children} />
       break
 
     case 'image':
@@ -151,14 +100,6 @@ export default async function Block({ block, classNames }: Props) {
       )
       break
 
-    case 'divider':
-      content = <></>
-      break
-
-    case 'quote':
-      content = <blockquote>{text}</blockquote>
-      break
-
     case 'equation':
       content = <BlockMath>{value?.expression}</BlockMath>
       break
@@ -182,5 +123,5 @@ export default async function Block({ block, classNames }: Props) {
   }
 
   if (!content) return null
-  return <div className={cx('root', type, classNames)}>{content}</div>
+  return <Element className={cx('root', type, classNames)}>{content}</Element>
 }

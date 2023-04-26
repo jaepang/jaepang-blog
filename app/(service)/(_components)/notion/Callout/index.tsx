@@ -4,7 +4,7 @@ import classNames from 'classnames/bind'
 import styles from '@components/notion/Block/Block.module.css'
 const cx = classNames.bind(styles)
 
-export default function Callout({ value, children }) {
+export function Callout({ value, children }) {
   const { color } = value
   let style: CSSProperties
 
