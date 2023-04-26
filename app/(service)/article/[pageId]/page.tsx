@@ -1,3 +1,4 @@
+import Row, { ROW_TYPE } from '@components/layout/Row'
 import RenderBlocks from '@components/notion/Block/RenderBlocks'
 import Header from '../Header'
 
@@ -25,9 +26,9 @@ export default async function ArticlePage({ params }: { params: { pageId: string
   }*/
 
   return (
-    <div>
+    <Row as="article" type={ROW_TYPE.FULL_SCREEN}>
       <Header page={page} />
       <RenderBlocks blocks={blocks.results} />
-    </div>
+    </Row>
   )
 }

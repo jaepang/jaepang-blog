@@ -3,9 +3,9 @@ import Navbar from '@components/layout/Navbar'
 
 export default function Layout({ children }) {
   return (
-    <>
+    <main>
       <Navbar />
-      <Row type={ROW_TYPE.FULL_SCREEN}>{children}</Row>
-    </>
+      {children}
+    </main>
   )
 }

@@ -47,7 +47,7 @@ export default async function FeedPageComponent({ params }: { params: { tag: str
   const maxPage = await calcFeedPageSize(postsPerPage, filter)
 
   return (
-    <Row type={ROW_TYPE.WIDE}>
+    <Row as="section" type={ROW_TYPE.WIDE}>
       <h1>{tag}</h1>
       {pages.map(page => (
         <PageCard key={page.id} page={page} />

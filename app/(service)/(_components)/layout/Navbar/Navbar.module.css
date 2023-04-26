@@ -4,7 +4,6 @@
   padding: 0 16px;
   display: flex;
   align-items: center;
-  column-gap: 0.2em;
   background-color: var(--color-bg-dimmed);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--color-light-gray-border);
@@ -13,9 +12,17 @@
   top: 0;
   z-index: 10;
 
-  .logo-wrapper {
-    height: 1.5em;
-    aspect-ratio: 1;
-    position: relative;
+  .home-link {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    column-gap: 0.2em;
+    text-decoration: none;
+
+    .logo-wrapper {
+      height: 1.5em;
+      aspect-ratio: 1;
+      position: relative;
+    }
   }
 }

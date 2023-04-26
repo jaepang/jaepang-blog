@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import CreatedAt from './CreatedAt'
 
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
@@ -16,23 +17,24 @@ export default function Header({ page }: { page: PageObjectResponse }) {
   }
 
   return (
-    <div className={cx('root')}>
+    <header className={cx('root')}>
       <h1 className={cx('title')}>{title}</h1>
       <CreatedAt createdTime={createdTime} />
       {tags && (
         <div className={cx('tags')}>
           {tags.map(tag => (
-            <div
+            <Link
+              href={`/${tag.name}/1`}
               key={tag.id}
               className={cx('tag')}
               style={{
                 backgroundColor: `var(--color-bg-${tag.color})`,
               }}>
               {tag.name}
-            </div>
+            </Link>
           ))}
         </div>
       )}
-    </div>
+    </header>
   )
 }
