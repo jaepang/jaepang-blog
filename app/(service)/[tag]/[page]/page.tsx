@@ -7,30 +7,6 @@ import { extractDabaseTags } from '@shared/utils/notion'
 
 const tagPropertyName = 'tag'
 const postsPerPage = 10
-export const revalidate = 600
-export async function generateStaticParams() {
-  const tags = await extractDabaseTags(tagPropertyName)
-  const params = []
-
-  for (const tag of tags) {
-    const maxPage = await calcFeedPageSize(postsPerPage, [
-      {
-        property: tagPropertyName,
-        multi_select: {
-          contains: tag,
-        },
-      },
-    ])
-    params.push(
-      ...Array.from({ length: maxPage }, (_, i) => i + 1).map(page => ({
-        tag,
-        page: page.toString(),
-      })),
-    )
-  }
-
-  return params
-}
 
 export default async function FeedPageComponent({ params }: { params: { tag: string; page: string } }) {
   const page = parseInt(params.page)
@@ -55,4 +31,29 @@ export default async function FeedPageComponent({ params }: { params: { tag: str
       <Pagination tag={tag} curPage={page} maxPageSize={maxPage} />
     </Row>
   )
+}
+
+export const revalidate = 60
+export async function generateStaticParams() {
+  const tags = await extractDabaseTags(tagPropertyName)
+  const params = []
+
+  for (const tag of tags) {
+    const maxPage = await calcFeedPageSize(postsPerPage, [
+      {
+        property: tagPropertyName,
+        multi_select: {
+          contains: tag,
+        },
+      },
+    ])
+    params.push(
+      ...Array.from({ length: maxPage }, (_, i) => i + 1).map(page => ({
+        tag,
+        page: page.toString(),
+      })),
+    )
+  }
+
+  return params
 }
