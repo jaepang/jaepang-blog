@@ -7,7 +7,14 @@ import { tagPropertyName, postsPerPage } from './config'
 
 export { revalidate, generateStaticParams } from './config'
 
-export default async function FeedPageComponent({ params }: { params: { tag: string; page: string } }) {
+interface Props {
+  params: {
+    tag: string
+    page: string
+  }
+}
+
+export default async function FeedPageComponent({ params }: Props) {
   const page = parseInt(params.page)
   const { tag } = params
   const filter = [

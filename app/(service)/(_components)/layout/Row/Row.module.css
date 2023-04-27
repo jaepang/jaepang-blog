@@ -1,28 +1,21 @@
+.root {
+  margin: 0 auto;
+  margin-top: 3em;
+  padding-bottom: 1.5em;
+  position: relative;
+}
+
 /* Row type 분기 */
 .full-screen {
   width: 100%;
-  position: relative;
 }
 
 .wide {
   max-width: var(--size-content-width-wide);
   padding: 0 16px;
-  margin: 0 auto;
-  position: relative;
 }
 
 .normal {
   max-width: var(--size-content-width);
   padding: 0 16px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.no_margin {
-  margin: 0;
-}
-
-.top {
-  margin-top: 3em;
-  padding-bottom: 1.5em;
 }

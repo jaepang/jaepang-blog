@@ -14,3 +14,13 @@ export function calcPaginationBound(curPage: number, maxPageSize: number, numOfP
 
   return { from, to }
 }
+
+export function calcCenterZoomTransform(width: number, height: number, imgProperty: DOMRect) {
+  if (imgProperty) {
+    const scale = Math.min(width / imgProperty.width, height / imgProperty.height)
+    const translateY = -imgProperty.y + (height - imgProperty.height) / 2
+
+    return `translateY(${translateY}px) scale(${scale})`
+  }
+  return 'none'
+}

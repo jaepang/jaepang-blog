@@ -1,37 +1,36 @@
 'use client'
 
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import style from 'react-syntax-highlighter/dist/esm/styles/prism/one-dark'
 import { BsClipboard, BsClipboardCheck } from 'react-icons/bs'
 
 import { useState } from 'react'
-import { useWindowSize } from '@hooks/useWindowSize'
-
-/** add languages you want to use */
-import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
-import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
-import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
-import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javascript'
-import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
-import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
-import cpp from 'react-syntax-highlighter/dist/esm/languages/prism/cpp'
+import { useCode } from './useCode'
 
 import classNames from 'classnames/bind'
 import styles from './Code.module.css'
 const cx = classNames.bind(styles)
 
-export default function Code({ value, children }) {
-  const [copied, setCopied] = useState(false)
-  const { width } = useWindowSize()
-  const isMobile = width <= 732
+const styleSkeleton = {
+  marginBottom: '0',
+  padding: '0.9em 0',
+  fontSize: '1.5em', // set padding size; default: 1em
+  lineHeight: '0',
+  borderRadius: 'var(--border-radius)',
+}
 
-  SyntaxHighlighter.registerLanguage('jsx', jsx)
-  SyntaxHighlighter.registerLanguage('tsx', tsx)
-  SyntaxHighlighter.registerLanguage('typescript', typescript)
-  SyntaxHighlighter.registerLanguage('javascript', javascript)
-  SyntaxHighlighter.registerLanguage('python', python)
-  SyntaxHighlighter.registerLanguage('css', css)
-  SyntaxHighlighter.registerLanguage('cpp', cpp)
+interface Props {
+  language: string
+  children: string
+}
+
+export default function Code({ language, children }: Props) {
+  const [copied, setCopied] = useState(false)
+  const { SyntaxHighlighter, isMobile } = useCode()
+
+  const customStyle = {
+    ...styleSkeleton,
+    paddingLeft: isMobile ? '0.75em' : '0',
+  }
 
   function copyToClipboard() {
     if (navigator?.clipboard) {
@@ -47,19 +46,6 @@ export default function Code({ value, children }) {
     }
   }
 
-  const language = value.language?.toLowerCase() || 'text'
-  const customStyle = {
-    marginBottom: '0',
-    padding: '0.9em 0',
-    fontSize: '1.5em', // set padding size; default: 1em
-    lineHeight: '0',
-    borderRadius: 'var(--border-radius)',
-    paddingLeft: width <= 732 ? '0.75em' : '0',
-  }
-  const lineNumberStyle = {
-    minWidth: '2.8em',
-  }
-
   return (
     <pre className={cx('root')}>
       <div className={cx('copy-wrapper', { 'click-available': !copied, copied: copied })} onClick={copyToClipboard}>
@@ -68,7 +54,7 @@ export default function Code({ value, children }) {
       <SyntaxHighlighter
         showLineNumbers={!isMobile}
         style={style}
-        lineNumberStyle={lineNumberStyle}
+        lineNumberStyle={{ minWidth: '2.8em' }}
         useInlineStyles={true}
         language={language.replace('++', 'pp')}
         customStyle={customStyle}>

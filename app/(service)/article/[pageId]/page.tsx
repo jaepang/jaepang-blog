@@ -7,7 +7,13 @@ import { queryChildrenBlocks, retrerivePage } from '@shared/notion'
 
 export { revalidate, generateStaticParams } from './config'
 
-export default async function ArticlePage({ params }: { params: { pageId: string } }) {
+interface Props {
+  params: {
+    pageId: string
+  }
+}
+
+export default async function ArticlePage({ params }: Props) {
   const page = (await retrerivePage(params.pageId)) as PageObjectResponse
   const blocks = (await queryChildrenBlocks(params.pageId)) as { results: BlockObjectResponse[] }
   const descRichText = (page.properties.description as any)?.rich_text

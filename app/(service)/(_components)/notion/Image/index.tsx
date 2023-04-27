@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 
-import { useState, useEffect } from 'react'
 import { useWindowSize } from '@hooks/useWindowSize'
+import { useImage } from './useImage'
+import { calcCenterZoomTransform } from '@shared/utils'
 import { IMAGE_SIZES } from '@shared/consts'
 
 import classNames from 'classnames/bind'
@@ -21,40 +22,11 @@ interface Props {
   }
 }
 
-function calcCenterZoomTransform(width: number, height: number, imgProperty: DOMRect) {
-  if (imgProperty) {
-    const scale = Math.min(width / imgProperty.width, height / imgProperty.height)
-    const translateY = -imgProperty.y + (height - imgProperty.height) / 2
-
-    return `translateY(${translateY}px) scale(${scale})`
-  }
-  return 'none'
-}
-
 export default function ImageBlock({ id, src, blurSrc, caption, size }: Props) {
-  const [isZoomed, setIsZoomed] = useState<boolean>(false)
-  const [imgProperty, setImgProperty] = useState<DOMRect>(null)
+  const { isZoomed, setIsZoomed, imgProperty, setImgProperty } = useImage(id)
   const { width, height } = useWindowSize()
   const aspectRatio = size.width / size.height
   const transform = calcCenterZoomTransform(width, height, imgProperty)
-
-  useEffect(() => {
-    if (window) {
-      window.addEventListener('scroll', () => setIsZoomed(false))
-    }
-
-    return () => {
-      if (window) {
-        window.removeEventListener('scroll', () => setIsZoomed(false))
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (document) {
-      setImgProperty(document?.getElementById(id)?.getBoundingClientRect())
-    }
-  }, [id])
 
   function handleClick() {
     if (document) {

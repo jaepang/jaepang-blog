@@ -99,14 +99,6 @@
     }
   }
 
-  &.callout .callout-body {
-    width: calc(100% - 2em);
-    padding: 0.5em 1em;
-    display: flex;
-    column-gap: 0.5em;
-    border-radius: var(--border-radius);
-  }
-
   &.code.summary {
     padding: 0 5px;
   }

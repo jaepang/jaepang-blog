@@ -106,7 +106,8 @@ export default async function Block({ block, classNames }: Props) {
 
     case 'code':
       const code = value?.rich_text?.map(({ text }) => text.content).join('') || ''
-      content = <Code value={value}>{code}</Code>
+      const language = value?.language?.toLowerCase() || 'text'
+      content = <Code language={language}>{code}</Code>
       break
 
     case 'callout':
