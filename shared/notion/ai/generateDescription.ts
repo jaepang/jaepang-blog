@@ -1,5 +1,4 @@
 import { notion } from '@shared/notion'
-import { NotionToMarkdown } from 'notion-to-md'
 import { v4 as uuid } from 'uuid'
 import { getTitlePlaintext, getPagePropertiesString } from '@shared/utils/notion'
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
@@ -36,9 +35,6 @@ async function parseAiResponse(res: Response) {
 export async function generateDescription(page: PageObjectResponse) {
   const title = getTitlePlaintext(page)
   const properties = await getPagePropertiesString(page.properties)
-  const n2m = new NotionToMarkdown({ notionClient: notion })
-  const mdBlocks = await n2m.pageToMarkdown(page.id)
-  const content = n2m.toMarkdownString(mdBlocks)
 
   const body = {
     id: uuid(),
@@ -46,7 +42,7 @@ export async function generateDescription(page: PageObjectResponse) {
     context: {
       type: 'summarize',
       pageTitle: title,
-      slectedText: properties + content,
+      slectedText: properties,
     },
   }
   const res = await fetch(url, {
