@@ -2,6 +2,8 @@
   width: auto;
   display: grid;
   grid-gap: 0;
+  /* about 14px */
+  font-size: 0.78em;
 
   .cell {
     padding: 0 8px;

@@ -3,36 +3,47 @@
   border-radius: var(--border-radius);
   position: relative;
 
-  &.summary {
-    width: calc(100% + 32px);
-    margin-left: -16px;
-  }
-
-  .copy-wrapper {
+  .header {
+    width: calc(100% - 2.2em);
     position: absolute;
-    top: 0.7em;
-    right: 1em;
-    color: hsl(220, 14%, 71%);
+    top: 0.5em;
+    left: 1.1em;
+    opacity: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.1s ease-in-out;
 
-    &.click-available {
-      cursor: pointer;
+    .language {
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.8em;
+      color: var(--color-text-gray-dark);
+    }
 
-      &:hover {
+    .copy-wrapper {
+      display: flex;
+      column-gap: 0.2em;
+      align-items: center;
+      color: hsl(220, 14%, 71%);
+      font-family: 'Pretendard', sans-serif;
+      font-size: 0.8em;
+
+      &.click-available {
+        cursor: pointer;
+
+        &:hover {
+          color: white;
+        }
+      }
+
+      &.copied {
         color: white;
       }
     }
-
-    &.copied {
-      color: white;
-    }
   }
 
-  .language {
-    position: absolute;
-    bottom: 0.7em;
-    right: 1em;
-    font-family: 'Pretendard', sans-serif;
-    font-size: 0.8em;
-    color: var(--color-text-gray-dark);
+  &:hover .header {
+    opacity: 1;
+    transition: all 0.1s ease-in-out;
   }
 }

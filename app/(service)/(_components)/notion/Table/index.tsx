@@ -18,7 +18,7 @@ interface Props {
 
 export default function Table({ table, childrenBlocks }: Props) {
   const { has_column_header, has_row_header } = table
-  const { data, paddingLeft, columnLength, rowLength } = useTable(childrenBlocks)
+  const { data, paddingLeft, rowLength, columnLength } = useTable(childrenBlocks)
 
   return (
     <div

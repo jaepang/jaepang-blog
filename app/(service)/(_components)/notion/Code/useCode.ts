@@ -1,8 +1,5 @@
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 
-import { useState, useEffect } from 'react'
-import { useWindowSize } from '@hooks/useWindowSize'
-
 /** add languages you want to use */
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
@@ -13,13 +10,13 @@ import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/prism/cpp'
 
 export function useCode() {
-  const [isMobile, setIsMobile] = useState(false)
-  const { width } = useWindowSize()
-
-  useEffect(() => {
-    setIsMobile(width <= 732)
-  }, [width])
-
+  const customStyle = {
+    marginBottom: '0',
+    padding: '1.3em 0.7em',
+    fontSize: '1.5em', // set padding size; default: 1em
+    lineHeight: '0',
+    borderRadius: 'var(--border-radius)',
+  }
   SyntaxHighlighter.registerLanguage('jsx', jsx)
   SyntaxHighlighter.registerLanguage('tsx', tsx)
   SyntaxHighlighter.registerLanguage('typescript', typescript)
@@ -28,5 +25,5 @@ export function useCode() {
   SyntaxHighlighter.registerLanguage('css', css)
   SyntaxHighlighter.registerLanguage('cpp', cpp)
 
-  return { isMobile, SyntaxHighlighter }
+  return { SyntaxHighlighter, customStyle }
 }

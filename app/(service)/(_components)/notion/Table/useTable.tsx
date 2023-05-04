@@ -20,7 +20,7 @@ export function useTable(childrenBlocks: BlockObjectResponse[]) {
   return {
     data,
     paddingLeft,
-    columnLength,
     rowLength: rows.length,
+    columnLength,
   }
 }
