@@ -2,16 +2,11 @@ import Row, { ROW_TYPE } from '@components/layout/Row'
 import RenderBlocks from '@components/notion/Block/RenderBlocks'
 import Header from './Header'
 
+import { Props } from './config'
 import { BlockObjectResponse, PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { queryChildrenBlocks, retrerivePage } from '@shared/notion'
 
-export { revalidate, generateStaticParams } from './config'
-
-interface Props {
-  params: {
-    pageId: string
-  }
-}
+export { revalidate, generateStaticParams, generateMetadata } from './config'
 
 export default async function ArticlePage({ params }: Props) {
   const page = (await retrerivePage(params.pageId)) as PageObjectResponse
