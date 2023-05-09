@@ -79,7 +79,13 @@ export default async function Block({ block, classNames }: Props) {
       const src = value.type === 'external' ? value?.external?.url : value?.file?.url
       const caption = value?.caption ? value.caption[0]?.plain_text : ''
       const size = await probe(src)
-      const { base64: blurSrc } = await getPlaiceholder(src)
+      let blurSrc: string | undefined
+      try {
+        const { base64 } = await getPlaiceholder(src)
+        blurSrc = base64
+      } catch (e) {
+        blurSrc = undefined
+      }
 
       content = (
         <ImageBlock
