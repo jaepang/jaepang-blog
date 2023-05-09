@@ -32,6 +32,7 @@ export default async function FeedPageComponent({ params }: Props) {
     <Row as="section" type={ROW_TYPE.WIDE}>
       <h1>{tag}</h1>
       {pages.map(page => (
+        /* @ts-expect-error Server Component */
         <PageCard key={page.id} page={page} />
       ))}
       <Pagination tag={tag} curPage={page} maxPageSize={maxPage} />

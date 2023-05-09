@@ -71,13 +71,10 @@ export async function getPagePropertiesString(properties: any) {
 export async function generateAndUpdateDescription(page: PageObjectResponse) {
   const description = await translate(await generateDescription(page), 'korean')
 
-  const newDescription = page.properties.description as any
   const richText = { text: { content: description } } as TextRichTextItemResponse
-  newDescription.id = uuid()
-  newDescription.rich_text.push(richText)
 
   try {
-    await updatePageProperty(page.id, { description: newDescription })
+    await updatePageProperty(page.id, { description: [richText] })
   } catch (e) {
     console.log(e)
     /** do_nothing */
