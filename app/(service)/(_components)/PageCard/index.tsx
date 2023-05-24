@@ -9,7 +9,7 @@ import classNames from 'classnames/bind'
 import styles from './PageCard.module.css'
 const cx = classNames.bind(styles)
 
-export default async function PageCard({ page }: { page: PageObjectResponse }) {
+export default function PageCard({ page }: { page: PageObjectResponse }) {
   const title = getTitlePlaintext(page)
   const coverImgSrc = getCoverImageSrc(page)
 
