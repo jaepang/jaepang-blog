@@ -38,7 +38,7 @@ export async function queryPageIds(filter: any[]): Promise<string[]> {
   return pageIds
 }
 
-export async function retrerivePage(pageId: string): Promise<GetPageResponse> {
+export async function retrievePage(pageId: string): Promise<GetPageResponse> {
   const page = await notion.pages.retrieve({
     page_id: pageId,
   })
