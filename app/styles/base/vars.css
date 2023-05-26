@@ -126,6 +126,7 @@
   --size-content-width: 700px;
   --size-content-width-wide: 900px;
   --border-radius: 12px;
+  --backdrop-filter: saturate(180%) blur(5px);
   --color-bg-header: var(--color-dark);
   --color-text-header: var(--color-text-white);
   --color-text-header-dimmed: var(--color-text-white-dimmed);

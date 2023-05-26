@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   background-color: var(--color-bg-dimmed);
-  backdrop-filter: blur(10px);
+  backdrop-filter: var(--backdrop-filter);
   border-bottom: 1px solid var(--color-light-gray-border);
 
   position: fixed;

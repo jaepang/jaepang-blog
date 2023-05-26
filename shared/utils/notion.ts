@@ -29,7 +29,8 @@ export function getCoverImageSrc(page: PageObjectResponse): string {
   return ''
 }
 
-export async function getPagePropertiesString(properties: any) {
+export async function getPagePropertiesString(page: PageObjectResponse) {
+  const { properties } = page
   const propertiesString = Object.keys(properties).reduce((acc, key) => {
     const property = properties[key]
     const { type } = property

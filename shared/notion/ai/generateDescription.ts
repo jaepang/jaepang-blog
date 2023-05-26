@@ -34,7 +34,7 @@ async function parseAiResponse(res: Response) {
 
 export async function generateDescription(page: PageObjectResponse) {
   const title = getTitlePlaintext(page)
-  const properties = await getPagePropertiesString(page.properties)
+  const properties = await getPagePropertiesString(page)
 
   const body = {
     id: uuid(),

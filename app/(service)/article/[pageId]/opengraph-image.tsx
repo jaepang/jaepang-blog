@@ -4,6 +4,8 @@ import { retrievePage } from '@shared/notion'
 import { getTitlePlaintext, getCoverImageSrc } from '@shared/utils'
 import { Props } from './config'
 
+import OGImage from './OGImage'
+
 export async function generateImageMetadata({ params }: Props) {
   const { pageId } = params
   const page = (await retrievePage(pageId)) as PageObjectResponse
@@ -24,25 +26,13 @@ export default async function Image({ params }: Props) {
   const page = (await retrievePage(pageId)) as PageObjectResponse
   const title = getTitlePlaintext(page)
   const cover = getCoverImageSrc(page)
+  const { tag } = page.properties
+  const { multi_select: tags } = tag as {
+    multi_select: { id: string; name: string; color: string }[]
+  }
 
-  return new ImageResponse(
-    (
-      <div
-        style={{
-          width: '100%',
-          height: '100%',
-          background: cover ? `url(${cover})` : '#000',
-          fontSize: '128',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}>
-        {title ?? ''}
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 600,
-    },
-  )
+  return new ImageResponse(<OGImage {...{ title, cover, tags }} />, {
+    width: 1200,
+    height: 600,
+  })
 }
