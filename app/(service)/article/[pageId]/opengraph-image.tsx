@@ -29,6 +29,8 @@ export default async function Image({ params }: Props) {
     (
       <div
         style={{
+          width: '100%',
+          height: '100%',
           background: cover ? `url(${cover})` : '#000',
           fontSize: '128',
           display: 'flex',
