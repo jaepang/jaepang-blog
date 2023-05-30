@@ -20,6 +20,14 @@ export async function generateImageMetadata({ params }: Props) {
     },
   ]
 }
+export const runtime = 'edge'
+
+const pretendardExtraBold = fetch(new URL('@public/font/Pretendard/Pretendard-ExtraBold.otf', import.meta.url)).then(
+  res => res.arrayBuffer(),
+)
+const pretendardRegular = fetch(new URL('@public/font/Pretendard/Pretendard-Regular.otf', import.meta.url)).then(res =>
+  res.arrayBuffer(),
+)
 
 export default async function Image({ params }: Props) {
   const { pageId } = params
@@ -34,5 +42,19 @@ export default async function Image({ params }: Props) {
   return new ImageResponse(<OGImage {...{ title, cover, tags }} />, {
     width: 1200,
     height: 600,
+    fonts: [
+      {
+        name: 'Pretendard',
+        data: await pretendardExtraBold,
+        style: 'normal',
+        weight: 800,
+      },
+      {
+        name: 'Pretendard',
+        data: await pretendardRegular,
+        style: 'normal',
+        weight: 500,
+      },
+    ],
   })
 }
