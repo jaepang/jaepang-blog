@@ -21,6 +21,16 @@ export async function generateImageMetadata({ params }: Props) {
   ]
 }
 export const runtime = 'edge'
+async function getPretendardExtraBold() {
+  return await fetch(new URL('@public/font/Pretendard/Pretendard-ExtraBold.otf', import.meta.url)).then(res =>
+    res.arrayBuffer(),
+  )
+}
+async function getPretendardRegular() {
+  return await fetch(new URL('@public/font/Pretendard/Pretendard-Regular.otf', import.meta.url)).then(res =>
+    res.arrayBuffer(),
+  )
+}
 
 const pretendardExtraBold = fetch(new URL('@public/font/Pretendard/Pretendard-ExtraBold.otf', import.meta.url)).then(
   res => res.arrayBuffer(),
@@ -45,13 +55,13 @@ export default async function Image({ params }: Props) {
     fonts: [
       {
         name: 'Pretendard',
-        data: await pretendardExtraBold,
+        data: await getPretendardExtraBold(),
         style: 'normal',
         weight: 800,
       },
       {
         name: 'Pretendard',
-        data: await pretendardRegular,
+        data: await getPretendardRegular(),
         style: 'normal',
         weight: 500,
       },

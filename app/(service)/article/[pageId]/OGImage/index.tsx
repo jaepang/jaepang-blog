@@ -47,7 +47,8 @@ export default function OGImage({ title, cover, tags }: Props) {
               lineHeight: 1.1,
               fontSize: '75px',
               fontWeight: 'bolder',
-              color: 'var(--color-text-default)',
+              // css variables not work
+              color: '#37352f',
             }}>
             {title}
           </div>
@@ -67,7 +68,7 @@ export default function OGImage({ title, cover, tags }: Props) {
                   alignItems: 'center',
                   justifyContent: 'center',
                   padding: '5px 12px',
-                  borderRadius: '10px',
+                  borderRadius: '20px',
                   fontSize: '24px',
                   color: '#fff',
                   backgroundColor: '#E088B9',
