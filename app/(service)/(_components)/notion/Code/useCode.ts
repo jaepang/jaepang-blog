@@ -8,6 +8,7 @@ import javascript from 'react-syntax-highlighter/dist/esm/languages/prism/javasc
 import python from 'react-syntax-highlighter/dist/esm/languages/prism/python'
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css'
 import cpp from 'react-syntax-highlighter/dist/esm/languages/prism/cpp'
+import shell from 'react-syntax-highlighter/dist/esm/languages/prism/shell-session'
 
 export function useCode() {
   const customStyle = {
@@ -24,6 +25,7 @@ export function useCode() {
   SyntaxHighlighter.registerLanguage('python', python)
   SyntaxHighlighter.registerLanguage('css', css)
   SyntaxHighlighter.registerLanguage('cpp', cpp)
+  SyntaxHighlighter.registerLanguage('shell', shell)
 
   return { SyntaxHighlighter, customStyle }
 }
