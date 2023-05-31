@@ -29,7 +29,8 @@ export default function OGImage({ title, cover, tags }: Props) {
           padding: '0 64px',
           display: 'flex',
           alignItems: 'center',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          background:
+            'linear-gradient(104.04deg, #FFFFFF 0%, rgba(255, 255, 255, 0.9) 55%, rgba(255, 255, 255, 0.0103092) 100%)',
           /* not working
           backdropFilter: 'saturate(180%) blur(5px)',
           */
@@ -46,7 +47,7 @@ export default function OGImage({ title, cover, tags }: Props) {
               marginBottom: '32px',
               lineHeight: 1.1,
               fontSize: '75px',
-              fontWeight: 'bolder',
+              fontWeight: '900',
               // css variables not work
               color: '#37352f',
             }}>
@@ -78,6 +79,7 @@ export default function OGImage({ title, cover, tags }: Props) {
             ))}
           </div>
         </div>
+        {/* eslint-disable-next-line */}
         <img
           style={{
             width: '27%',
