@@ -1,6 +1,6 @@
 interface Props {
   title: string
-  cover: string
+  cover?: string
   tags: {
     id: string
     name: string
@@ -19,7 +19,9 @@ export default function OGImage({ title, cover, tags }: Props) {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        background: `url(${cover})`,
+        background: cover
+          ? `url(${cover})`
+          : 'linear-gradient(64.46deg, #E088B9 13.53%, rgba(224, 136, 185, 0.85) 47.04%, rgba(224, 136, 185, 0.32) 96.51%)',
         backgroundSize: '1200px 600px',
       }}>
       <div

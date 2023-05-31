@@ -18,7 +18,7 @@ export async function generateStaticParams() {
     params.push(
       ...Array.from({ length: maxPage }, (_, i) => i + 1).map(page => ({
         tag,
-        page: page.toString(),
+        page: page?.toString() ?? '',
       })),
     )
   }
