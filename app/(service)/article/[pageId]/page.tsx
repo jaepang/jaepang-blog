@@ -11,12 +11,6 @@ export { revalidate, generateStaticParams, generateMetadata } from './config'
 export default async function ArticlePage({ params }: Props) {
   const page = (await retrievePage(params.pageId)) as PageObjectResponse
   const blocks = (await queryChildrenBlocks(params.pageId)) as { results: BlockObjectResponse[] }
-  const descRichText = (page.properties.description as any)?.rich_text
-
-  /*
-  if (descRichText?.length === 0 || descRichText?.[0].plain_text === '') {
-    await generateAndUpdateDescription(page)
-  }*/
 
   return (
     <Row as="article" type={ROW_TYPE.FULL_SCREEN}>
