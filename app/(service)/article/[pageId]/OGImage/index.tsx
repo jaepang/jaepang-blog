@@ -73,6 +73,7 @@ export default function OGImage({ title, cover, tags }: Props) {
                   padding: '5px 12px',
                   borderRadius: '20px',
                   fontSize: '24px',
+                  fontWeight: 400,
                   color: '#fff',
                   backgroundColor: '#E088B9',
                 }}>

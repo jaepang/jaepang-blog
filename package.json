@@ -35,6 +35,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "@total-typescript/ts-reset": "^0.4.2",
     "@types/probe-image-size": "^7.2.0",
     "@types/react-katex": "^3.0.0",
     "@types/uuid": "^9.0.1"

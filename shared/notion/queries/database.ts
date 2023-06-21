@@ -1,5 +1,5 @@
 import { notion } from '@shared/notion'
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
+import { PageObjectResponse, QueryDatabaseResponse } from '@notionhq/client/build/src/api-endpoints'
 
 export async function retrieveDatabase() {
   const database_id = process.env.NOTION_DATABASE_ID
@@ -11,7 +11,7 @@ export async function queryDatabase(PAGE_SIZE: number, page: number, filter: any
   let cursor = undefined
   let has_more = true
   let curPage = 0
-  let res = undefined
+  let res: QueryDatabaseResponse = undefined
 
   if (database_id) {
     while (has_more && curPage < page) {

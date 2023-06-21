@@ -31,8 +31,11 @@ export default async function Image({ params }: Props) {
   const { multi_select: tags } = tag as {
     multi_select: { id: string; name: string; color: string }[]
   }
-  const pretendardBold = fetch(new URL(`@public/font/Pretendard/Pretendard-Bold.otf`, import.meta.url)).then(res =>
+  const pretendardBold = fetch(new URL(`@public/font/Pretendard/Pretendard-Bold.woff2`, import.meta.url)).then(res =>
     res.arrayBuffer(),
+  )
+  const pretendardRegular = fetch(new URL(`@public/font/Pretendard/Pretendard-Regular.woff2`, import.meta.url)).then(
+    res => res.arrayBuffer(),
   )
 
   return new ImageResponse(<OGImage {...{ title, cover, tags }} />, {
@@ -44,6 +47,12 @@ export default async function Image({ params }: Props) {
         data: await pretendardBold,
         style: 'normal',
         weight: 800,
+      },
+      {
+        name: 'Pretendard',
+        data: await pretendardRegular,
+        style: 'normal',
+        weight: 400,
       },
     ],
   })
