@@ -34,9 +34,6 @@ export default async function Image({ params }: Props) {
   const pretendardBold = fetch(new URL(`@public/font/Pretendard/Pretendard-Bold.woff2`, import.meta.url)).then(res =>
     res.arrayBuffer(),
   )
-  const pretendardRegular = fetch(new URL(`@public/font/Pretendard/Pretendard-Regular.woff2`, import.meta.url)).then(
-    res => res.arrayBuffer(),
-  )
 
   return new ImageResponse(<OGImage {...{ title, cover, tags }} />, {
     width: 1200,
