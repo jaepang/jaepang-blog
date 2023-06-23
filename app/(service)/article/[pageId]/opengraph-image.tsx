@@ -48,12 +48,6 @@ export default async function Image({ params }: Props) {
         style: 'normal',
         weight: 800,
       },
-      {
-        name: 'Pretendard',
-        data: await pretendardRegular,
-        style: 'normal',
-        weight: 400,
-      },
     ],
   })
 }
