@@ -1,4 +1,4 @@
-import { ImageResponse } from 'next/server'
+import { ImageResponse } from 'next/og'
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints'
 import { retrievePage } from '@shared/notion'
 import { getTitlePlaintext, getCoverImageSrc } from '@shared/utils'

@@ -29,7 +29,8 @@ export function getPropertyPlainText(page: PageObjectResponse, name: string): st
 export function getCoverImageSrc(page: PageObjectResponse): string {
   if (page.cover?.type === 'external') {
     return page.cover?.external?.url
-  } else if (page.cover?.type === 'file') {
+  }
+  if (page.cover?.type === 'file') {
     return page.cover?.file?.url
   }
   return ''
